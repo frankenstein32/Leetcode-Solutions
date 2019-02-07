@@ -49,6 +49,8 @@ public class k_diff{
 			if(left == right){
 				right++;
 			}
+
+				
 		}
 
 		return cnt;
