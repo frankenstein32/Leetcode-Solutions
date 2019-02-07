@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ContainsDuplicate{
+public class MaxOnes{
 	
 	public static void main(String[] args){
 
@@ -14,7 +14,8 @@ public class ContainsDuplicate{
 			arr[i] = scn.nextInt();
 		}
 
-		System.out.println(check(arr));
+		System.out.println(cnt(arr));
+
 	}
 
  	public static void display(int[] arr){
@@ -25,20 +26,25 @@ public class ContainsDuplicate{
  		System.out.println();
  	}
 
-	public static boolean check(int[] nums){
+	public static int cnt(int[] nums){
 
-		HashMap<Integer, Integer> map = new HashMap<>();
+		int maxCount = 0;
+		int count = 0;
 
-		for(int i = 0; i < nums.length;i++){
 
-			if(map.containsKey(nums[i])){
-				return true;
+		for(int i = 0;i < nums.length;i++){
+
+			if(nums[i] == 1){
+				count++;
 			}else{
-				map.put(nums[i],1);
+				count = 0;
+			}
+
+			if(count > maxCount){
+				maxCount = count;
 			}
 		}
 
-		return false;
+		return maxCount;
 	}
-
 }
