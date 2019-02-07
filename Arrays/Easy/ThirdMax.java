@@ -14,7 +14,7 @@ public class ThirdMax{
 			arr[i] = scn.nextInt();
 		}
 
-		System.out.println(move(arr));
+		System.out.println(find(arr));
 	}
 
  	public static void display(int[] arr){
@@ -25,24 +25,39 @@ public class ThirdMax{
  		System.out.println();
  	}
 
-	public static int move(int[] nums){
+	public static int find(int[] nums){
 
-		int i = 0;
-		int j = 0;
+		int max1 = Integer.MIN_VALUE;
+		int max2 = Integer.MIN_VALUE;
+		int max3 = Integer.MIN_VALUE;
 
-		while(j < nums.length){
+		for(int i = 0; i < n;i++){
 
-			if(nums[j] != 0){
+			max1 = Math.max(nums[i],max1);
+		}	
 
-				int temp = nums[i];
-				nums[i] = nums[j];
-				nums[j] = temp;
-				i++;
-			}
-			j++;
+		for(int i = 0; i < n;i++){
 
+			if(nums[i] < max1 && nums[i] > max2)
+				max2 = nums[i];
+		}	
 
+		for(int i = 0; i < n;i++){
+
+			if(nums[i] < max2 && nums[i] > max3)
+				max3 = nums[i];
+		}	
+
+		if(max2 == Integer.MIN_VALUE || max3 == Integer.MIN_VALUE){
+
+			return max1;
 		}
+
+		return max3;
+
+
+
+	
 	}
 
 }
