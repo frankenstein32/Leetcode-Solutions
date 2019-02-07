@@ -31,10 +31,6 @@ public class RemoveElement{
 
 	public static int removeElement(int[] nums,int val){
 
-		 if(nums.length < 2){
-            return nums.length;
-        }
-
 		
 		int i = 0,j = 0;
 
