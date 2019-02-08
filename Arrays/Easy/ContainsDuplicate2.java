@@ -38,7 +38,7 @@ public class ContainsDuplicate2{
 				if(Math.abs(i - j) <= k)
 					return true;
 			}else{
-				map.put(nums[i],1);
+				map.put(nums[i],i);
 			}
 		}
 
