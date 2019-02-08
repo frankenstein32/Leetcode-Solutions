@@ -24,13 +24,14 @@ public class  min_cost_climbing_stairs{
 
 	public static int minCostClimbingStairs(int[] cost){
 
+		System.out.println(climb(cost,0,new int[cost.length]));
 		return climb_BU(cost);
 		
 	}
 
 	public static int climb(int[] cost, int vidx,int[] strg){
 
-		if(vidx == cost.length || vidx == cost.length - 1){
+		if(vidx >= cost.length - 1){
 			return 0;
 		}
 

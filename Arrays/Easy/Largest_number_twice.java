@@ -6,11 +6,11 @@ public class  Largest_number_twice{
 
 		Scanner scn = new Scanner(System.in);
 
-		int[] arr = {1, 100, 1, 1, 1, 100, 1, 1, 100, 1};
+		int[] arr = {1, 2, 3, 4};
 		int k = 4;
 		// display2(arr);
 		
-		System.out.println(minCostClimbingStairs(arr));
+		System.out.println(dominantIndex(arr));
 	}
 
  	public static void display(int[] arr){
@@ -22,43 +22,25 @@ public class  Largest_number_twice{
  		System.out.println();
  	}
 
-	public static int minCostClimbingStairs(int[] cost){
+	public static int dominantIndex(int[] nums){
 
-		return climb_BU(cost);
+		int max_idx= 0;
+		for(int i = 0;i < nums.length;i++){
+
+			if(nums[max_idx] < nums[i]){
+
+				max_idx = i;
+			}
+		}
+
+		for(int i = 0;i < nums.length;i++){
+			
+			if(nums[i] != nums[max_idx] && 2*nums[i] > nums[max_idx]){
+				return -1;
+			}
+		}
+		return max_idx;
 		
 	}
-
-	public static int climb(int[] cost, int vidx,int[] strg){
-
-		if(vidx == cost.length || vidx == cost.length - 1){
-			return 0;
-		}
-
-		if(strg[vidx] != 0){
-			return strg[vidx];
-		}
-
-
-		int rr1 = climb(cost,vidx + 1,strg) + cost[vidx];
-		int rr2 = climb(cost,vidx + 2,strg) + cost[vidx + 1];
-
-		strg[vidx] = Math.min(rr1,rr2);
-		return Math.min(rr1,rr2);
-	}
-	public static int climb_BU(int[] cost){
-
-		int[] strg = new int[cost.length + 1];
-
-		for(int i = cost.length - 2;i >= 0;i--){
-
-			strg[i] = Math.min(strg[i + 1] + cost[i],strg[i + 2] + cost[i + 1]);
-		}
-
-		return strg[0];
-
-	}
-
-
-	
 		
 }
