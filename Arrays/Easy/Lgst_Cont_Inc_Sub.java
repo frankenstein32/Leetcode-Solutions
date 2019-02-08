@@ -29,7 +29,7 @@ public class  Lgst_Cont_Inc_Sub{
 		int max = 0;
 		for(int i = 0;i < nums.length;i++){
 
-			if(i > 0 && nums[i - 1] > nums[i])
+			if(i > 0 && nums[i - 1] >= nums[i])
 				anchor = i;
 
 			max = Math.max(max,i - anchor + 1);
