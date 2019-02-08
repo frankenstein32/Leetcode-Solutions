@@ -9,7 +9,7 @@ public class Shortest_unsorted_subarray{
 		int[] arr = {2,6,4,8,10,9,15};
 		// display2(arr);
 		
-		System.out.println(findUnsortedSubarray(arr));
+		System.out.println(findUnsortedSubarray_eff(arr));
 	}
 
  	public static void display(int[] arr){
@@ -23,40 +23,49 @@ public class Shortest_unsorted_subarray{
 
 	public static int findUnsortedSubarray(int[] nums){
 
-		if(nums.length < 2){
-			return 0;
-		}
+		int r = 0;
+		int l = nums.length;
 
-		int flag = 0;
-		List<Integer> res = new ArrayList<>();
+		for(int i = 0;i < nums.length;i++){
 
-		for(int i = 0; i < nums.length - 1;i++){
+			for(int j = i + 1;j < nums.length;j++){
+				
 
-			if(nums[i] > nums[i + 1]){
-				res.add(i);
-				flag = 1;
-			}
+				if(nums[j] < nums[i]){
 
-			if(flag == 1 && nums[i] == nums[i + 1]){
-				res.add(i);
+					r = Math.max(r,j);
+					l = Math.min(l,i);
+				}
 			}
 		}
 
-		int len = 0;
-		if(res.size() != 0){
-			// System.out.print(res.get(0)+" ");
-			// System.out.println(res.get(res.size() - 1) + 1);
+		return r - l < 0? 0 : r - l + 1;
 
-			len = res.get(res.size() - 1) + 1 - res.get(0);
-			return len + 1;
-		}else{
-			return 0;
-		}
-
-		
-		
-	
 	}
+
+	public static int findUnsortedSubarray_eff(int[] nums){
+
+		int end = 0;
+		int start = nums.length;
+
+		int[] dummy = nums.clone();
+		Arrays.sort(dummy);
+
+		for(int i = 0;i < nums.length;i++){
+
+			if(nums[i] != dummy[i]){
+
+				start = Math.min(start,i);
+				end = Math.max(end,i);
+
+			}
+		}
+
+		return end - start < 0? 0 : end - start + 1;
+
+	}
+
+
 
 	
 		
