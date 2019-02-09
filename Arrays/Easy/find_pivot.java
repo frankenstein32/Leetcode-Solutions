@@ -24,18 +24,20 @@ public class  find_pivot{
 
 	public static int pivotIndex(int[] nums){
 
+		if(nums.length < 1)
+			return -1;
 		
 		int left = nums[0];
 		int right = 0;
-		for(int i = 1;i < nums.length;i++){
+		for(int i = 0;i < nums.length;i++){
 			right += nums[i];
 		}
-		System.out.println(left +" "+right);
-		for(int i = 1;i < nums.length;i++){
+		// System.out.println(left +" "+right);
+		for(int i = 0;i < nums.length;i++){
 
 			right = right - nums[i];
 
-			System.out.println(left +" "+right);
+			// System.out.println(left +" "+right);
 			if(left == right){
 				return i;
 			}

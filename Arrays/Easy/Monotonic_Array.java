@@ -29,13 +29,13 @@ public class  Monotonic_Array{
 
 		for(int i = 1;i < nums.length;i++){
 
-
-			if(nums[i - 1] <= nums[i] && !isDec){
-				isDec = true;
-			}else if(nums[i - 1] >= nums[i] && !isInc){
+			if(nums[ i - 1] == nums[i]){
+				continue;
+			}else if(nums[i - 1] < nums[i] && !isDec){
 				isInc = true;
+			}else if(nums[i - 1] > nums[i] && !isInc){
+				isDec = true;
 			}else{
-
 				return false;
 			}
 		}
