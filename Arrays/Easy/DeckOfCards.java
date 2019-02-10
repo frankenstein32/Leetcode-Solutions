@@ -7,14 +7,9 @@ public class DeckOfCards{
 		Scanner scn = new Scanner(System.in);
 
 		// int n = scn.nextInt();
-		int[] arr = {1, 0, 0, 0};
+		int[] arr = {1, 2, 3, 4, 4, 3, 2, 1};
 
-		// for(int i = 0;i < n;i++){
-
-		// 	arr[i] = scn.nextInt();
-		// }
-
-		System.out.println(maxDistToClosest(arr));
+		System.out.println(hasGroupsSizeX(arr));
 	}
 
  	public static void display(int[] arr){
@@ -25,46 +20,46 @@ public class DeckOfCards{
  		System.out.println();
  	}
 
-	public static int maxDistToClosest(int[] nums){
+	public static boolean hasGroupsSizeX(int[] nums){
 
-		int[] leftD = new int[nums.length];
-		int[] rightD = new int[nums.length];
-
-		Arrays.fill(leftD,nums.length);
-		Arrays.fill(rightD,nums.length);
+		
+		HashMap<Integer,Integer> map = new HashMap<>();
 
 		for(int i = 0;i < nums.length;i++){
 
-			if(nums[i] == 1) leftD[i] = 0;
-			else if(i > 0){
-				leftD[i] = leftD[i - 1] + 1;
+			if(map.containsKey(nums[i])) {
+				map.put(nums[i], map.get(nums[i]) + 1);
+			}else {
+				map.put(nums[i],1);
+			}
+		}
+
+		int ideal = -1;
+
+		for(int key : map.keySet()){
+
+			if(map.get(key) < 2){
+				return false;
 			}
 
-		}
-
-		for(int i = nums.length - 2;i >= 0;i--){
-
-			if(nums[i] == 1){
-				rightD[i] = 0;
-			}else if(i < nums.length - 1){
-				rightD[i] = rightD[i + 1] + 1;
+			if(ideal == -1){
+				ideal = map.get(key);
+			}else{
+				ideal = gcd(ideal,map.get(key));
 			}
-
 		}
 
-		int max_dist = 0;
-		for(int i = 0;i < nums.length;i++){
+		return ideal >= 2;
 
-			if(nums[i] == 0)
-			max_dist = Math.max(max_dist, Math.min(leftD[i],rightD[i]));
-			
+	}
 
+	public static int gcd(int x, int y){
+
+		if(x == 0){
+			return y;
 		}
 
-		return max_dist;
-
-
-
+		return gcd(y%x,x);
 	}
 
 }
