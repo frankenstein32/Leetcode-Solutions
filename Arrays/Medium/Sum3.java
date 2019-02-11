@@ -54,10 +54,12 @@ public class Sum3{
 						triplet.add(nums[i]);
 						triplet.add(nums[j]);
 						triplet.add(nums[k]);
-						// j++;
-						k--;
+		
 						ans.add(triplet);
 						triplet = new ArrayList<>();
+
+						j++;
+						k--;
 
 						while(j < k && nums[j] == nums[j - 1]){
 							j++;
