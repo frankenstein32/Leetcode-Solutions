@@ -112,7 +112,7 @@ public class Unique_Path{
 		 	}
 		 }
 
-		 display2(strg);
+		 // display2(strg);
 		 return strg[1][1];
 
 
