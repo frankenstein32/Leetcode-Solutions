@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class spiral_2{
+public class WordSearch{
 	
 	public static void main(String[] args){
 
