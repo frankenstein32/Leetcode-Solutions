@@ -31,30 +31,26 @@ public class RemoveDuplicates2{
 
 	public static int removeDuplicates(int[] arr){
 
-		 
-		 int i = 0;
-		 int j = 0;
-		int cnt = 0;
+		if(arr.length < 3){
+			return arr.length;
+		}
 
-		 while(j < arr.length){
+		int prev = 1;
+		int curr = 2;
 
-		 	if(arr[i] != arr[j]){
+		while(curr < arr.length){
 
-		 		if(cnt < 3){
-		 			int temp = arr[i];
-			 		arr[i] = arr[j];
-			 		arr[j] = temp;
-		 		
-		 		}
-		 		i = j;
-		 		cnt = 1;
-		 		
-		 	}else{
-		 		cnt++;
-		 	}
-		 	j++;
-		 }
 
-		 return i;
+			if(arr[prev] == arr[curr] && arr[prev] == arr[prev - 1]){
+				curr++;
+			}else{
+
+				prev++;
+				arr[prev] = arr[curr];
+				curr++;
+			}
+		}
+
+		return prev;
 	}
 }

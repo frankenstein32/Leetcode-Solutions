@@ -6,11 +6,12 @@ public class WordSearch{
 
 		Scanner scn = new Scanner(System.in);
 
-		int[][] arr ={{1,1,0},{1,0,1},{0,0,0}};
+		char[][] arr ={{'A','B','C','E'},{'S','F','C','S'},{'A','D','E','E'}};
+		String word = "ABCB";
 		int k = 4;
 		// display2(arr);
 		
-		display2(print(3));
+		System.out.println(exist(arr,word))       ;
 
 	}
 
@@ -27,50 +28,58 @@ public class WordSearch{
  		System.out.println("]");
  	}
 
- 	public static int[][] print(int n){
+ 	public static boolean exist(char[][] arr,String word){
 
- 		int[][] mat = new int[n][n];
- 		int count = 1;
-
- 		int minRow = 0;
- 		int maxRow = n - 1;
- 		int minCol = 0;
- 		int maxCol = n - 1;
-
- 		while(count <= n * n){
-
- 			for(int col = minCol;col <= maxCol && count <= n * n;col++){
-
- 				mat[minRow][col] = count;
- 				count++;
+ 		
+ 		boolean ans = true;
+ 		for(int i = 0; i < arr.length;i++){
+ 			for(int j = 0;j < arr[0].length;j++){
+ 				boolean[][] visited = new boolean[arr.length][arr[0].length];
+ 				if(helper(arr,i,j,word,visited))
+ 					return true;
  			}
+ 		}
+		return false;		
 
- 			minRow++;
+ 	}
 
- 			for(int row = minRow;row <= maxRow && count <= n * n;row++){
- 				mat[row][maxCol] = count;
- 				count++;
- 			}
+ 	public static boolean helper(char[][] arr, int cr, int cc, String word, boolean[][] visited){
 
- 			maxCol--;
-
- 			for(int col =  maxCol;col >= minCol && count <= n * n;col--){
- 				mat[maxRow][col] = count;
- 				count++;
- 			}
-
- 			maxRow--;
-
- 			for(int row = maxRow;row >= minRow && count <= n * n; row--){
-
- 				mat[row][minCol] = count;
- 				count++;
- 			}
- 			minCol++;
-
-
+ 		if(word.length() == 0){
+ 			return true;
  		}
 
- 		return mat;
+ 		if(cr < 0 || cc < 0 || cr >= arr.length || cc >= arr[0].length || visited[cr][cc])
+ 			return false;
+
+ 		char ch = word.charAt(0);
+
+
+ 		if(ch == arr[cr][cc]){
+
+ 			visited[cr][cc] = true;
+ 			String ros = word.substring(1);
+ 			boolean rr1 = helper(arr,cr + 1,cc,ros,visited);
+ 			boolean rr2 = helper(arr,cr - 1,cc,ros,visited);
+ 			boolean rr3 = helper(arr,cr,cc - 1,ros,visited);
+ 			boolean rr4 = helper(arr,cr, cc + 1,ros,visited);
+ 			visited[cr][cc] = false;
+
+ 			return rr1 || rr2 || rr3 || rr4;
+ 		}else{
+
+ 			visited[cr][cc] = true;
+ 			boolean rr1 = helper(arr,cr + 1,cc,word,visited);
+ 			boolean rr2 = helper(arr,cr - 1,cc,word,visited);
+ 			boolean rr3 = helper(arr,cr,cc - 1,word,visited);
+ 			boolean rr4 = helper(arr,cr, cc + 1,word,visited);
+ 			visited[cr][cc] = false;
+
+ 			return rr1 || rr2 || rr3 || rr4;
+
+ 		}
  	} 
+
+ 	
 }
+
