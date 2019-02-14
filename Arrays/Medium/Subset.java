@@ -7,7 +7,7 @@ public class Subset{
 		Scanner scn = new Scanner(System.in);
 
 		// int n = scn.nextInt();
-		int[] arr = {1, 2, 3};
+		int[] arr = {1, 2, 2,3};
 
 		// for(int i = 0;i < n;i++){
 
@@ -15,6 +15,7 @@ public class Subset{
 		// }
 		int target = 8;
 		System.out.println(subsets(arr));
+		System.out.println(subsets_itr(arr));
 	}
 
  	public static void display(int[] arr){
@@ -51,6 +52,37 @@ public class Subset{
 
 
 	}
+
+	public static List<List<Integer>> subsets_itr(int[] S) {
+		
+		List<List<Integer>> res = new ArrayList<>();
+
+		Arrays.sort(S);
+
+		for(int i = 0;i < S.length;i++){
+
+			List<List<Integer>> temp = new ArrayList<>();
+
+			for(List<Integer> a : res)
+				temp.add(new ArrayList<>(a));
+
+			for(List<Integer> a : temp)
+				a.add(S[i]);
+
+			List<Integer> single = new ArrayList<>();
+			single.add(S[i]);
+			temp.add(single);
+
+			res.addAll(temp);
+		}
+
+		res.add(new ArrayList<>());
+
+		return res;
+
+
+	}
+
 
 	
 }
