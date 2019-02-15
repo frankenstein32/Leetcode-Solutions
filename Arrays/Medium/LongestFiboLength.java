@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class AppropriateAge{
+public class LongestFiboLength{
 	
 	public static void main(String[] args){
 
@@ -43,7 +43,10 @@ public class AppropriateAge{
 	 			res += countA * countB;
 
 	 		}
+
+	 		return res;
 	 	}
-		return res;
+
+
 	}
 }
