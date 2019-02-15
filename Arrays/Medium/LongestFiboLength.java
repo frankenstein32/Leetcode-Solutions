@@ -9,7 +9,7 @@ public class LongestFiboLength{
 		// int n = scn.nextInt();
 		int[] arr = {1,0,2,3,4};
 		int target = 2;
-		System.out.println(count(arr,2,4));
+		System.out.println(lenLongestFibSubseq(arr));
 		// display(productExceptSelf_Eff(arr));
 	}
 
@@ -21,32 +21,40 @@ public class LongestFiboLength{
  		System.out.println();
  	}
 
-	 public static int count(int[] ages) {
+	 public static int lenLongestFibSubseq(int[] nums) {
 
-	 	int[] count = new int[121];
+	 	Set<Integer> set = new HashSet<>();
 
-	 	for(int age : ages)
-	 		count[age]++;	
-
-	 	int res = 0;
-
-	 	for(int i = 0;i < 121;i++){
-
-	 		countA = count[i];
-	 		for(int j = 0; j < 121;j++){
-	 			countB = count[j];
-
-	 			if(0.5 * i + 7 > j) continue;
-	 			else if(i < j) continue;
-	 			else if(i < 100 && j > 100) continue;
-
-	 			res += countA * countB;
-
-	 		}
-
-	 		return res;
+	 	for(int num : nums){
+	 		set.add(num);
 	 	}
 
+	 	int max = 0;
 
+	 	for(int i = 0;i < nums.length;i++){
+	 		for(int j = i + 1; j < nums.length;j++){
+
+
+	 			int len = 2;
+
+	 			int a = nums[i];
+	 			int b = nums[j];
+
+	 			int sum = a + b;
+
+	 			while(set.contains(sum)){
+
+	 				len++;
+	 				a = b;
+	 				b = sum;
+	 				max = Math.Max(max,len);
+	 				sum = a + b;
+	 			}
+	 		}
+	 	}
+
+	 	return max;
 	}
+
+
 }
