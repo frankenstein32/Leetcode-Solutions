@@ -60,7 +60,7 @@ public class Subset{
 		Arrays.sort(S);
 
 		for(int i = 0;i < S.length;i++){
-
+			
 			List<List<Integer>> temp = new ArrayList<>();
 
 			for(List<Integer> a : res)
