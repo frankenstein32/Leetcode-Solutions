@@ -6,19 +6,19 @@ public class FindAll{
 
 		Scanner scn = new Scanner(System.in);
 
-		int n = scn.nextInt();
-		int[] arr = new int[n];
-
-		for(int i = 0;i < n;i++){
-
-			arr[i] = scn.nextInt();
-		}
+		int[] arr = {4,3,2,7,8,2,3,1};
 
 		System.out.println(find(arr));
 	}
 
  	public static void display(int[] arr){
 
+ 		System.out.print("Indice=> ");
+ 		for(int i = 0 ;i < arr.length;i++){
+ 			System.out.print((i + 1) +" ");
+ 		}
+ 		System.out.println();
+ 		System.out.print("Values=> ");
  		for(int i = 0 ;i < arr.length;i++){
  			System.out.print(arr[i] +" ");
  		}
@@ -27,30 +27,21 @@ public class FindAll{
 
 	public static List<Integer> find(int[] nums){
 
-		Arrays.sort(nums);
-		display(nums);
-		List<Integer> ans = new ArrayList<>();
+		for(int i = 0;i < nums.length;i++){
+			
+			int val = Math.abs(nums[i]);
 
-		int cnt = 1;
-		for(int i = 0;i < nums.length;){
-
-			if(cnt + 1 == nums[i]){
-				i++;
-				cnt++;
-			}else if(cnt != nums[i]){
-				cnt++;
-				ans.add(cnt);
-				
-			}else{
-				i++;
+			if(nums[val - 1] >= 0){
+				nums[val - 1] = -nums[val - 1];
 			}
-
 		}
 
-		System.out.println(cnt - 1);	
+		ArrayList<Integer> ans = new ArrayList<>();
+		for(int i = 0;i < nums.length;i++){
 
+			ans.add(i + 1);
+		}
 		return ans;
-
 	
 	}
 

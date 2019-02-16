@@ -65,6 +65,33 @@ public class Shortest_unsorted_subarray{
 
 	}
 
+	public static int findUnsortedSubarray_eff2(int[] nums){
+
+
+		int start = nums.length;
+		int end = 0;
+		Stack<Integer> stack = new Stack<>();
+
+		for(int i = 0;i  < nums.length;i++){
+
+			while(!stack.isEmpty() && nums[stack.peek()] > nums[i]){
+				start = Math.min(start,stack.pop());
+			}
+			stack.push(i);
+		}
+
+		for(int i = arr.length - 1;i >= 0;i--){
+
+			while(!stack.isEmpty() && nums[stack.peek()] < nums[i]){
+				end = Math.max(end,stack.pop());
+			}
+			stack.push(i);
+		}
+
+		return end - start > 0 ? end - start + 1 : 0;		
+
+	}
+
 
 
 	
