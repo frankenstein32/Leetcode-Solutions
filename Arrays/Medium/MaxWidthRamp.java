@@ -38,8 +38,8 @@ public class MaxWidthRamp{
 
 	 	for(int i = 0;i < temp.length;i++){
 
-	 		res = Math.max(res,nums[i] - min);
-	 		min = Math.min(nums[i],min);
+	 		res = Math.max(res,temp[i] - min);
+	 		min = Math.min(temp[i],min);
 	 	}
 
 	 	return res;
