@@ -12,7 +12,7 @@ Containing Solution for LeetCode Questions TopicWise
 - Math
 - Two Pointers
 - String
-- Binary Search
+- Searching and Sorting
 - Divide and Conquer
 - Dynamic Programming
 - BackTracking
@@ -20,7 +20,10 @@ Containing Solution for LeetCode Questions TopicWise
 - Heap
 - Greedy
 - Tree
-- DFS
-- BFS
+- Graph
 - Recursion
 - Queue
+- Bit manipulation
+- Segment Trees
+- Topological Sort
+- Map
