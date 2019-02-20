@@ -14,7 +14,7 @@ public class CombinationSum{
 		// 	arr[i] = scn.nextInt();
 		// }
 		int target = 8;
-		System.out.println(comb(arr,target));
+		System.out.println(calculateSum(arr,target));
 	}
 
  	public static void display(int[] arr){
@@ -59,6 +59,34 @@ public class CombinationSum{
 
 		return mr;
 
+	}
+
+	public static List<List<Integer>> calculateSum(int[] nums,int target){
+
+		List<List<Integer>> ans = new ArrayList<>();
+		calculateSum(nums, 0, ans,new ArrayList<>(),target);
+		return ans;
+	}
+
+	public static void calculateSum(int[] nums, int vidx, List<List<Integer>> ans,List<Integer> temp,int target){
+
+
+		if(target == 0){
+			ans.add(new ArrayList<>(temp));
+			return;
+		}
+
+		for(int i = vidx; i < nums.length;i++){
+
+			if(target >= nums[i]){
+
+				temp.add(nums[i]);
+				calculateSum(nums,i,ans,temp,target - nums[i]);
+				temp.remove(temp.size() - 1);
+
+			}
+			
+		}
 	}
 
 }

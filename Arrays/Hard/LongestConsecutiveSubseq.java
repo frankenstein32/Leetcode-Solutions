@@ -38,6 +38,26 @@ public class LongestConsecutiveSubseq{
             map.put(num + 1,false);
           }
         }
+
+        int maxCount = 0;
+
+        for(int key : map.keySet()){
+
+          if(map.get(key)){
+
+            int count = 0;
+
+            while(map.containsKey(count + key)){
+              count++;
+            }
+
+            if(count > maxCount){
+              maxCount = count;
+            }
+          }
+        }
+
+       return maxCount;
       }
 
     

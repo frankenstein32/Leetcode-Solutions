@@ -8,6 +8,7 @@ public class InsertInterval{
 
         // int n = scn.nextInt();
         int[] arr = {100, 4, 200, 1, 3, 2};
+        ArrayList<Interval> nums = new ArrayList<>();
         int target = 2;
         System.out.println(insert(arr));
         // display(productExceptSelf_Eff(arr));
@@ -37,31 +38,47 @@ public class InsertInterval{
       }
     }
 
-     public static List<List<Interval>> insert(List<List<Integer>> nums, Interval interval) {
+     public static List<Interval> insert(List<Interval> nums, Interval newinterval) {
 
-        ArrayList<Interval> ans = new ArrayList<>();
-        boolean added = false;
-      for(Interval val : nums){
+     
+        if(nums.size() == 0 || nums == null){
 
-        int start = val.start;
-        int end = val.end;
-
-        if((newInterval.start > start || newInterval.end < end) && added){
-
-          Interval narr = new Interval(Math.min(start,newInterval.start),Math.max(end,newInterval.end));
-          ans.add(narr);
-            added = true;
-        }else{
-          ans.add(val);
+         List<Interval> br = new ArrayList<>();
+         br.add(newinterval);
+          return br;
         }
 
-      }
+        List<Interval> res = new ArrayList<>();
 
-      return ans;
+        int i = 0;
+        int start = newinterval.start;
+        int end = newinterval.end;
 
+        while(i < nums.size() && nums.get(i).end < newinterval.start){
+          res.add(nums.get(i));
+          i++;
+        }
 
-      
+        if(i < nums.size() && nums.get(i).start <= newinterval.end){
 
+          start = Math.min(nums.get(i).start,start);
+          end = Math.max(nums.get(i).end,end);
+
+          while(i < nums.size() && nums.get(i).start <= end){
+            i++;
+          }
+
+          end = Math.max(nums.get(i - 1).end,end);
+
+        }
+
+        res.add(new Interval(start,end));
+        while(i < nums.size()){
+          res.add(nums.get(i));
+          i++;
+        }
+
+        return res;
 
     }
 
