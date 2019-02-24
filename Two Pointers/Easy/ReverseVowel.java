@@ -22,28 +22,28 @@ public class ReverseVowel{
 	public static String Reverse(String arr){
 
 		char[] charray = arr.toCharArray();
-		List<Character> list = Arrays.asList(new Character[]{'a','e','i','o','u'});
+		List<Character> list = Arrays.asList(new Character[]{'a','A','e','E','i','I','o','O','u','U'});
 		Set<Character> dummy = new HashSet<>(list);
 		int i = 0;
 		int j = arr.length() - 1;
 
 		while(i < j){
 
-			while(!dummy.contains(charray[i])){
+			while(i < arr.length() && !dummy.contains(charray[i])){
 				i++;
 			}
 
-			while(!dummy.contains(charray[j])){
+			while(j >= 0 && !dummy.contains(charray[j])){
 				j--;
 			}
 
 			if(i < j){
 
 				char temp = charray[i];
-				charray[i] = charray[arr.length() - i - 1];
-				charray[arr.length() - i - 1] = temp;
+				charray[i] = charray[j];
+				charray[j] = temp;
 				i++;
-				j--;
+				j--;                                                                                            
 			}
 		}
 
