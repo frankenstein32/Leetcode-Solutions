@@ -31,4 +31,32 @@ public class partition_1{
 
 		return sum;
 	}
+
+	public static int PairSum_eff(int[] nums){
+
+		int[] arr = new int[20001];
+
+		for(int val : nums){
+
+			arr[val + 10000]++;
+		}
+
+		int sum = 0;
+		boolean odd = true;
+		for(int i = 0;i < arr.length;i++){
+
+			while(arr[i] > 0){
+
+				if(odd){
+					sum += arr[i] - 10000;
+				}
+
+				odd = !odd;
+				arr[i]--;
+			}
+		}
+
+		return sum;
+
+	}
 }
