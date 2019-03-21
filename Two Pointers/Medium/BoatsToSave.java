@@ -6,10 +6,10 @@ public class BoatsToSave{
 
 		Scanner scn = new Scanner(System.in);
 
-		int[] arr = {2,1,4,7,3,2,5};
+		int[] people = {3,5,3,4};
 
-		System.out.println(longestMountain(arr));
-		
+		System.out.println(numRescueBoats(people,5));
+
 	}
 
  	public static void display(int[] arr){
@@ -20,32 +20,26 @@ public class BoatsToSave{
  		System.out.println();
  	}
 
-	public static int longestMountain(int[] A){
+	public static int numRescueBoats(int[] people, int limit){
 
-		int increase = 0;
-		int decrease = 0;
+		Arrays.sort(people);
 
-		int maxLen = 0;
-		for(int i = 1;i < A.length;i++){
+		int i = 0;
+		int j = people.length - 1;
+		int cnt = 0;
 
-			if(A[i] > A[i - 1]){
+		while(i <= j){
 
-				if(decrease > 0){
-					increase = decrease = 0;
-				}
-				increase++;
-			}else if(A[i] == A[i - 1]){
-				increase = decrease = 0;
-			}else if(increase > 0){
-
-				decrease++;
-				maxLen = Math.max(maxLen,increase + decrease + 1);
-
+			cnt++;
+			if(people[i] + people[j] <= limit){
+				i++;
 			}
+
+			j--;
 		}
 
-		return maxLen
-
+		return cnt;
 	}
+
 	
 }
