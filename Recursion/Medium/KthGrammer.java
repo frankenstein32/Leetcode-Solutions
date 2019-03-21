@@ -13,10 +13,9 @@ public class KthGrammer{
 
 	}
 
-	public static char kthGrammar(int n,int k){
+	public static int kthGrammar(int n,int k){
 
-		String ans =  helper(n, "0");
-		return ans.charAt(k - 1);
+		return helper(n,k);
 	}
 
 	public static String helper(int n, int k){
