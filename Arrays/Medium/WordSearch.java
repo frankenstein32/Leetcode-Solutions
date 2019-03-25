@@ -54,32 +54,18 @@ public class WordSearch{
 
  		char ch = word.charAt(0);
 
-
- 		if(ch == arr[cr][cc]){
+ 		if(board[cr][cc] != ch){
+ 			return false;
+ 		}
 
  			visited[cr][cc] = true;
  			String ros = word.substring(1);
- 			boolean rr1 = helper(arr,cr + 1,cc,ros,visited);
- 			boolean rr2 = helper(arr,cr - 1,cc,ros,visited);
- 			boolean rr3 = helper(arr,cr,cc - 1,ros,visited);
- 			boolean rr4 = helper(arr,cr, cc + 1,ros,visited);
+ 			boolean rr = helper(arr,cr + 1,cc,ros,visited) || helper(arr,cr - 1,cc,ros,visited)
+ 			|| helper(arr,cr,cc - 1,ros,visited) || helper(arr,cr, cc + 1,ros,visited);
+
  			visited[cr][cc] = false;
 
- 			return rr1 || rr2 || rr3 || rr4;
- 		}else{
-
- 			visited[cr][cc] = true;
- 			boolean rr1 = helper(arr,cr + 1,cc,word,visited);
- 			boolean rr2 = helper(arr,cr - 1,cc,word,visited);
- 			boolean rr3 = helper(arr,cr,cc - 1,word,visited);
- 			boolean rr4 = helper(arr,cr, cc + 1,word,visited);
- 			visited[cr][cc] = false;
-
- 			return rr1 || rr2 || rr3 || rr4;
-
+ 			return rr;
  		}
- 	} 
-
- 	
-}
+} 
 
