@@ -11,26 +11,49 @@ public class RestoreIP{
 
 	}
 
-	public static String comb(int n, int k){
+	public static List<String> restoreIPAdress(String s){
+
+		List<String> ans = new ArrayList<>();
+
+		int len = s.length();
+
+		for(int i = 1;i <= 3;i++){
+
+			if(len - i > 9){
+				continue;
+			}
+
+			for(int j = i + 1;j <= i + 3;j++){
+
+				if(len - j > 6){
+					continue;
+				}
+
+				for(int k = j + 1; k < len && k <= j + 3;k++){
+
+					int a, b, c, d;
+					a = Integer.parseInt(s.substring(0,i));
+					b = Integer.parseInt(s.substring(i,j));
+					c = Integer.parseInt(s.substring(j,k));
+					d = Integer.parseInt(s.substring(k));
+
+					if(a > 255 || b > 255 || c > 255 || d > 255){
+
+						continue;
+					}
 	
-		List<List<Integer>> combs = new ArrayList<>();
-		dfs(n, k);
+					String ip = a+"."+b+"."+c+"."+d;
 
-		return combs;
-	}
+					if(ip.length() < len + 3){
 
-	public static void dfs(List<List<Integer>> combs, List<Integer> comb, int start, int n, int k){
+						continue;
+					}
 
-		if(k == 0){
-			combs.add(new ArrayList<>(comb));
-		}else{
-
-			for(int i = start;i <= n;i++){
-
-				comb.add(i);
-				dfs(combs, comb, i + 1, n, k - 1);
-				comb.remove(comb.size() - 1);
+					ans.add(ip);
+				}
 			}
 		}
+
+		return ans;
 	}
 }
