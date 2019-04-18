@@ -22,6 +22,10 @@ public class UglyNumber{
 			return true;
 		}
 
+		if(num == 0){
+			return false;
+		}
+
 		if(num % 2 == 0){
 
 			return helper(num/2);

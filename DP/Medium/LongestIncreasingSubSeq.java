@@ -4,7 +4,7 @@ public class LongestIncreasingSubSeq{
 
 	public static void main(String[] args){
 
-		int[] arr = {10,9,2,5,3};
+		int[] arr = {9, 4, 7, 2, 10};
 		System.out.println(LengthOfLIS(arr));
 		
 	}
