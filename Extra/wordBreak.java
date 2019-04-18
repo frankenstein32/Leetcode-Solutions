@@ -7,53 +7,44 @@ public class wordBreak{
 		// String s = "a*";
 		// String p = "aa";
 		int n = 3;
-		System.out.println(comb(n,1));
+		System.out.println(breakIt(n, new Set<>()));
 
 	}
 
-	public static List<String> restoreIPAdress(String s){
+	public static boolean breakIt(String s, Set<String> dict){
 
-		List<String> ans = new ArrayList<>();
+		
+		// DFS
+		Set<Integer> set = new Set<>();
+		return dfs(s, 0, dict, set);
 
-		int len = s.length();
+	}
 
-		for(int i = 1;i <= 3;i++){
+	public static boolean dfs(String s, int idx, Set<String> dict, Set<Integer> set){
 
-			if(len - i > 9){
-				continue;
-			}
+		if(idx == s.length()){
+			return true;
+		}
 
-			for(int j = i + 1;j <= i + 3;j++){
+		if(set.contains(idx)){
+			return false;
+		}
 
-				if(len - j > 6){
-					continue;
-				}
+		for(int i = idx;i <= s.length();i++){
 
-				for(int k = j + 1; k < len && k <= j + 3;k++){
+			String t = s.substring(idx, i);
 
-					int a, b, c, d;
-					a = Integer.parseInt(s.substring(0,i));
-					b = Integer.parseInt(s.substring(i,j));
-					c = Integer.parseInt(s.substring(j,k));
-					d = Integer.parseInt(s.substring(k));
+			if(dict.contains(t)){
 
-					if(a > 255 || b > 255 || c > 255 || d > 255){
-
-						continue;
-					}
-	
-					String ip = a+"."+b+"."+c+"."+d;
-
-					if(ip.length() < len + 3){
-
-						continue;
-					}
-
-					ans.add(ip);
+				if(dfs(s,i,dict,set)){
+					return true;
+				}else{
+					set.add(i);
 				}
 			}
 		}
 
-		return ans;
+		set.add(idx);
+		return false;
 	}
 }
