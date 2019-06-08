@@ -54,5 +54,7 @@ public class DecodeString{
 				idx++;
 			}
 		}
+
+		return res;
 	}
 }

@@ -12,7 +12,7 @@ public class RemoveOuterParenthesis{
 
 		Stack<Character> stack = new Stack<>();
 		StringBuilder sb = new StringBuilder();
-
+		StringBuilder res = new StrinBuilder();
 		for(int i = 0;i < str.length();i++){
 
 			char ch = str.charAt(i);
@@ -32,10 +32,13 @@ public class RemoveOuterParenthesis{
 				sb.removeAt(0);
 				sb.removeAt(sb.length() - 1);
 
+				res.append(sb);
 				sb = new StringBuilder();
 
 			}
 		}
+
+		return sb.toString();
 
 
 	}	

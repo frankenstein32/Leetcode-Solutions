@@ -17,48 +17,17 @@ public class Intersection{
 
 	public static ListNode getInter(ListNode A, ListNode B, int m, int n){
 
+		ListNode a = A;
+		ListNode b = B;
 
-		int diff  = n - m;
+		while(a != b){
 
-		ListNode headB = B;
-		ListNode headA = A;
-
-		for(int i = 0;i < diff;i++){
-
-			headB = headB.next;
+			a = (a == null ? B : a.next);
+			b = (b == null ? A : b.next);
 		}
 
-		while(headA != null && headB != null){
-
-			if(headA.next == headB.next){
-				
-				return headA.next;	
-			}
-
-			headA = headA.next;
-			headB = headB.next;
-
-
-		}
-
-		return null;
-
-
+		return a;
 
 	}
-
-	public static int size(ListNode node){
-
-		int size = 0;
-
-		while(node != null){
-
-			size++;
-			node = node.next;
-		}
-
-		return size;
-	}
-
 	
 }

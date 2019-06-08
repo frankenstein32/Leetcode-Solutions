@@ -10,7 +10,7 @@ public class ValidateSequence{
 
 	}
 
-	public static int MinCount(int[] pushed, int[] popped){
+	public static boolean validate(int[] pushed, int[] popped){
 
 		Stack<Integer> stack = new Stack<>();
 		int j = 0;
@@ -22,9 +22,9 @@ public class ValidateSequence{
 				stack.pop();
 				j++;
 			}
-
-			
 		}
+
+		return stack.size() == 0;
 
 
 		

@@ -15,7 +15,7 @@ public class BasicCalculator{
 
 		Stack<Integer> stack = new Stack<>();
 		int result = 0;
-		int sign = 0;
+		int sign = 1;
 
 		for(int i = 0;i < str.length();i++){
 

@@ -79,20 +79,26 @@ public class MyLinkedList {
             return;
         }
         
-        
+        if(index == 0){
 
-        Node temp = this.head;
-        Node nn = new Node(val);
-        for(int i = 0;i < index - 1;i++){
-            temp = temp.next;
+            addAtHead(val);
+        }else if(index == size - 1){
+            addAtTail(val);
+        }else{
+
+            Node temp = this.head;
+            Node nn = new Node(val);
+            for(int i = 0;i < index - 1;i++){
+                temp = temp.next;
+            }
+            Node save = temp.next;
+            temp.next = nn;
+            temp.next = nn;
+            nn.next = save;
+            
+           
+            this.size++;
         }
-        Node save = temp.next;
-        temp.next = nn;
-        temp.next = nn;
-        nn.next = save;
-        
-       
-        this.size++;
     }
     
     /** Delete the index-th node in the linked list, if the index is valid. */

@@ -5,79 +5,44 @@ public class BaseBallGame{
 
 	public static void main(String[] args){
 
-
-		int[][] nums = {{},{}};
-		int k = 1;
-
-		System.out.println(sort(points,0, points.length,k));
-
 	}
 
-	public static boolean sort(int[][] points,int i, int j, int k){
+	public static int calculatePoints(String[] str){
 
-		if(i >= j){
-			return ;
+
+		Stack<Integer> stack = new Stack<>();
+
+		for(int i = 0;i < str.length;i++){
+
+
+			String op = str[i];
+			int item = Integer.parseInt(op);
+
+			if(op.equals("+")){
+
+				int a = Integer.parseInt(stack.pop());
+				int b = Integer.parseInt(stack.pop());
+
+				item = a + b;
+				stack.push(item);
+			}else if(op.equals("D")){	
+
+				int a = Integer.parseInt(stack.pop());
+				item = 2 * a;
+				stack.push(item);
+			}else if(op.equals("C")){
+
+				int a = Integer.parseInt(stack.pop());
+
+			}else{
+				stack.push(item);
+			}
 		}
 
-		int k = (i + j) / 2;
-
-		int mid = partition(points, i, j);
-
-		int length = mid - i + 1;
-		if(k < length){
-			sort(points,i, mid - 1,k);
-		}else if(k > length){
-			sort(points,mid + 1, j, k - length);
-		}
-
-
+		return stack.pop();
 	}
 
-	public static int partition(int[][] points, int i, int j){
-
-
-		int start = i;
-		int pivot = dist(i);
-		i++;
-
-		while(true){
-
-			while(i < j && dist(i) < pivot){
-				i++;
-			}
-
-			while(i < j && dist(j) > pivot){
-				j--;
-			}
-
-			if(i >= j){
-				break;
-			}
-
-			swap(i, j);
-		}
-
-		swap(start,j);
-
-		return j;
-
-	}
-
-	public static int dist(int[][] points, int i){
-
-		return points[i][0] * points[i][0] - points[i][1] * points[i][1];
-	}
-
-	public static int swap(int[][] points, int i , int j){
-
-		int temp1 = points[i][0], temp2 = points[i][1];
-
-		points[i][0] = points[j][0];
-		points[i][1] = points[j][1];
-
-		points[j][0] = temp1;
-		points[j][1] = temp2;
-	}
+	
 
 
 }

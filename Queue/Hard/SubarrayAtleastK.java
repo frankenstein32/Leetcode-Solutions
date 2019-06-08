@@ -10,46 +10,32 @@ public class SubarrayAtleastK{
 
 	}
 
-	public static int[] ExclusiveTime(int n,List<String> logs){
+	public static int shortestSubarray(int[] A, int k){
 
+		int N = A.length;
+		int res = N + 1;
 
-		Stack<int[]> stack = new Stack<>();
+		int[] B = new int[N + 1];
 
-		int[] func = new int[n];
-
-		for(int i = 0;i < logs.size();i++){
-
-			String[] arr = logs.get(i).split(":");
-
-			int idx = Integer.parseInt(arr[0]);
-			int timestamp = Integer.parseInt(arr[2]);
-
-			if(stack.isEmpty()){
-
-				stack.push(new int[]{idx, timestamp});
-			}else if(str[1].equals("start")){
-
-				int startTime = stack.peek()[1];
-				int secondTime = timestamp;
-
-				func[stack.peek()[0]] += secondTime - startTime;
-
-				stack.push(new int[]{idx, timestamp});
-
-			}else{
-
-				int finishTime = timestamp;
-				int startTime = stack.peek()[1];
-
-				func[stack.peek()[0]] = finishTime - startTime + 1;
-
-				stack.pop();
-
-				stack.peek()[1] = finishTime;
-			}
-
+		for(int i = 0;i < A.length;i++){
+			B[i + 1] = B[i] + A[i];
 		}
 
-		return func;
-	}	 
+		Deque<Integer> d = new ArrayDeque<>();
+
+		for(int i = 0;i < A.length;i++){
+
+			while(d.size() > 0 && B[i] - B[d.getFirst()] >= k){
+
+				res = Math.min(res, i - d.pollFirst());
+			}
+
+			while(d.size() > 0 && B[i] <= B[d.getLast()])
+				d.pollLast();
+
+			d.addLast(i);
+		}
+
+		return res <= N ? res : -1;
+	}
 }

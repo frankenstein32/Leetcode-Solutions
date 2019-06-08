@@ -15,29 +15,22 @@ public class Mid{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode remove(ListNode head){
+	public static int mid(ListNode head){
 
-		if(head == null || head.next == null){
-			return head;
+		if(head.next == null){
+			return head.val;
 		}
 
-		ListNode temp = head;
-		ListNode prev = head;
-		ListNode curr = prev.next;
+		ListNode slow = head;
+		ListNode fast = head.next;
 
-		while(curr != null){
+		while(fast != null && fast.next != null){
 
-			if(prev.val != curr.val){
-				prev.next = curr;
-				prev = curr;
-			}
-
-			curr = curr.next;
+			slow = slow.next;
+			fast = fast.next.next;
 		}
 
-		prev.next = curr;
-
-		return temp;
+		return slow;
 	}
 
 	
