@@ -15,23 +15,32 @@ public class RemoveElement{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static boolean hasCycle(ListNode head){
+	public static ListNode remove(ListNode head int val){
 
-		ListNode slow = head;
-		ListNode fast = head.next;
+		if(head == null){
+			return head;
+		}
+		
+		ListNode temp = new ListNode(0);
+		temp.next = head;
+		ListNode prev = temp;
+		ListNode curr = head;
 
-		while(fast != null && fast.next!= null){
+		while(curr != null){
 
-			if(slow == fast){
-				return true;
+			if(curr.val != val){
+
+				prev.next = curr;
+				prev = curr;
 			}
-			slow = slow.next;
-			fast = fast.next.next;
 
-			
+			curr = curr.next;
 		}
 
-		return false;
+		prev.next = curr;
+
+
+		return temp.next;
 	}
 
 	

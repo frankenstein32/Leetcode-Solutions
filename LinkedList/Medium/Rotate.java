@@ -15,35 +15,36 @@ public class Rotate{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode SwapPairs(ListNode head){
+	public static ListNode rotateList(ListNode head, int n){
 
-
-		if(head == null){
+		if(head = null){
 			return head;
 		}
 
-		ListNode prev = head;
-		ListNode curr = prev.next;
+		ListNode dummy = new Node(0);
+		dummy.next = head;
 
-		while(curr != null){
+		ListNode fast = dummy;
+		ListNode slow = dummy;
 
-			ListNode next = curr.next;
+		int i 0;
+		for(;fast.next != null;i++){
 
-			int temp = prev.val;
-			prev.val = curr.val;
-			curr.val = temp;
-
-			prev = next;
-			
-			if(next != null){
-				curr = next.next;
-			}else{
-				curr = null;
-			}
+			fast = fast.next;
 		}
 
-		return head;
+		for(int j = i - n % i;j > 0;j--){
 
+			slow = slow.next;
+		}
+
+		fast.next = dummy.next;
+		dummy.next = slow.next;
+		slow.next = null;
+
+		return dummy.next;
 	}
+
+
 	
 }

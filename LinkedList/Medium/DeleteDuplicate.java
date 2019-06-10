@@ -15,36 +15,37 @@ public class DeleteDuplicate{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode rotateList(ListNode head, int n){
+	public static ListNode delete(ListNode head){
 
-		if(head = null){
+		if(head == null || head.next == null){
 			return head;
 		}
 
-		ListNode dummy = new Node(0);
-		dummy.next = head;
+		ListNode Fakehead = new ListNode(0);
+		Fakehead.next = head;
 
-		ListNode fast = dummy;
-		ListNode slow = dummy;
+		ListNode prev = Fakehead;
+		ListNode curr = head;
 
-		int i 0;
-		for(;fast.next != null;i++){
+		while(curr != null){
 
-			fast = fast.next;
+
+			while(curr.next != null && curr.val != curr.next.val){
+				curr = curr.next;
+			}
+
+			if(prev.next == curr){
+				prev = prev.next;
+			}else{
+
+				prev.next = curr.next;
+			}
+
+			curr = curr.next;
 		}
 
-		for(int j = i - n % i;j > 0;j--){
-
-			slow = slow.next;
-		}
-
-		fast.next = dummy.next;
-		dummy.next = slow.next;
-		slow.next = null;
-
-		return dummy.next;
+		return Fakehead.next;
 	}
-
 
 	
 }

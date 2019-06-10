@@ -15,42 +15,40 @@ public class ReverseLL2{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode parition(ListNode head, int x){
+	public static reverse(ListNode head, int beg, int end){
 
-		if(head == null || head.next == null){
-			return head;
+		ListNode curr = head, prev = null;
+
+		while(beg > 1){
+
+			prev = curr;
+			curr = curr.next;
+
+			beg--;
+		 	end--;
 		}
 
-		ListNode shorter = new ListNode(0);
-		ListNode longer = new ListNode(0);
+		ListNode corner = prev, tail = curr;
+		ListNode third = null;
+		while(n > 0){
 
-		ListNode headS = shorter;
-		ListNode headL = longer;
-
-		while(head != null){
-
-			if(head.val < x){
-
-				headS.next = head;
-				headS = headS.next;
-			}else{
-
-				headL = head;
-				headL = headL.next;
-			}
-
-			head = head.next;
+			third = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = third;
+			n--;
 		}
 
-		if(shorter.next != null && longer.next != null){
 
-			shorted.next = longer.next;
-			return shorter;
-		}else if(shorted.next == null){
-			return longer.next;
-		}else{
-			return shorter.next;
-		}
+		if(corner != null)
+			corner.next = prev;
+		else
+			head = prev;
+
+		tail.next = curr;
+
+		return head;
+
 
 	}
 

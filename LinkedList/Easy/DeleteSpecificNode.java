@@ -15,36 +15,11 @@ public class DeleteSpecificNode{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode ReverseDataIterative(ListNode head){
-
-		ArrayList<Integer> temp = new ArrayList<>();
-
-		Node node = head;
-
-		while(node != null){
-
-			temp.add(node.val);
-			node = node.next;
-		}
-
-		node = head;
-		int j = temp.size() - 1;
-
-		while(node != null){
-
-			node.val = temp.get(j);
-			j--
-			node = node.next;
-		}
-
-		return head;
-	}
-
-	public static ListNode ReversePointerIterative(ListNode head){
+	public static void delete(ListNode node, int item){
 
 
-		if(head == null || head.next == null){
-			return head;
+		if(node == null || this.head == null){
+			return ;
 		}
 
 		ListNode prev = head;
@@ -52,31 +27,13 @@ public class DeleteSpecificNode{
 
 		while(curr != null){
 
-			ListNode next = curr.next;
+			if(curr.val == item){
+				prev.next = curr.next;
+				break;
+			}
 
-			curr.next = prev;
 			prev = curr;
-			curr = next;
+			curr = curr.next;
 		}
-
-		return prev;
-	}
-
-
-	public static ListNode ReversePointers(ListNode prev, ListNode curr){
-
-		if(curr == null){
-			return null;
-		}
-
-		ListNode head = ReversePointers(curr, curr.next);
-
-		if(curr.next == null){
-			head = curr;
-		}
-
-		curr.next = prev;
-
-		return head;
 	}
 }

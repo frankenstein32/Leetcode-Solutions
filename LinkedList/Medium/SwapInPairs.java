@@ -15,27 +15,34 @@ public class SwapInPairs{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode Find(ListNode head, int n){
+	public static ListNode SwapPairs(ListNode head){
 
 
-		ListNode slow = head;
-		ListNode fast = head;
+		if(head == null){
+			return head;
+		}
 
-	for(int i = 0;i < n - 1 && fast != null;i++){
+		ListNode prev = head;
+		ListNode curr = prev.next;
 
-		fast = fast.next;
-	}
+		while(curr != null){
 
-	while(fast != null){
+			ListNode next = curr.next;
 
-		fast = fast.next;
-		slow = slow.next;
+			int temp = prev.val;
+			prev.val = curr.val;
+			curr.val = temp;
 
-	}
+			prev = next;
+			
+			if(next != null){
+				curr = next.next;
+			}else{
+				curr = null;
+			}
+		}
 
-	slow.next = slow.next;
-
-	return head;
+		return head;
 
 	}
 	

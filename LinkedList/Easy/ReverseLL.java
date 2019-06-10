@@ -15,33 +15,68 @@ public class ReverseLL{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode remove(ListNode head int val){
+	public static ListNode ReverseDataIterative(ListNode head){
 
-		if(head == null){
+		ArrayList<Integer> temp = new ArrayList<>();
+
+		Node node = head;
+
+		while(node != null){
+
+			temp.add(node.val);
+			node = node.next;
+		}
+
+		node = head;
+		int j = temp.size() - 1;
+
+		while(node != null){
+
+			node.val = temp.get(j);
+			j--
+			node = node.next;
+		}
+
+		return head;
+	}
+
+	public static ListNode ReversePointerIterative(ListNode head){
+
+
+		if(head == null || head.next == null){
 			return head;
 		}
-		
-		ListNode temp = new ListNode(0);
-		temp.next = head;
-		ListNode prev = temp;
-		ListNode curr = head;
+
+		ListNode prev = head;
+		ListNode curr = prev.next;
 
 		while(curr != null){
 
-			if(curr.val != val){
+			ListNode next = curr.next;
 
-				prev.next = curr;
-				prev = curr;
-			}
-
-			curr = curr.next;
+			curr.next = prev;
+			prev = curr;
+			curr = next;
 		}
 
-		prev.next = curr;
-
-
-		return temp.next;
+		return prev;
 	}
 
-	
-}
+
+	public static ListNode ReversePointers(ListNode prev, ListNode curr){
+
+		if(curr == null){
+			return null;
+		}
+
+		ListNode head = ReversePointers(curr, curr.next);
+
+		if(curr.next == null){
+			head = curr;
+		}
+
+		curr.next = prev;
+
+		return head;
+	}
+}3

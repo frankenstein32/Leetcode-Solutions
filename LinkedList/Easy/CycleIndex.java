@@ -15,29 +15,23 @@ public class CycleIndex{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode remove(ListNode head){
+	public static boolean hasCycle(ListNode head){
 
-		if(head == null || head.next == null){
-			return head;
-		}
+		ListNode slow = head;
+		ListNode fast = head.next;
 
-		ListNode temp = head;
-		ListNode prev = head;
-		ListNode curr = prev.next;
+		while(fast != null && fast.next!= null){
 
-		while(curr != null){
-
-			if(prev.val != curr.val){
-				prev.next = curr;
-				prev = curr;
+			if(slow == fast){
+				return true;
 			}
+			slow = slow.next;
+			fast = fast.next.next;
 
-			curr = curr.next;
+			
 		}
 
-		prev.next = curr;
-
-		return temp;
+		return false;
 	}
 
 	

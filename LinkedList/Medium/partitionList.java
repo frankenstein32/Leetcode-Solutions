@@ -15,36 +15,43 @@ public class partitionList{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode delete(ListNode head){
+	public static ListNode parition(ListNode head, int x){
 
 		if(head == null || head.next == null){
 			return head;
 		}
 
-		ListNode Fakehead = new ListNode(0);
-		Fakehead.next = head;
+		ListNode shorter = new ListNode(0);
+		ListNode longer = new ListNode(0);
 
-		ListNode prev = Fakehead;
-		ListNode curr = head;
+		ListNode headS = shorter;
+		ListNode headL = longer;
 
-		while(curr != null){
+		while(head != null){
 
+			if(head.val < x){
 
-			while(curr.next != null && curr.val != curr.next.val){
-				curr = curr.next;
-			}
-
-			if(prev.next == curr){
-				prev = prev.next;
+				headS.next = head;
+				headS = headS.next;
 			}else{
 
-				prev.next = curr.next;
+				headL = head;
+				headL = headL.next;
 			}
 
-			curr = curr.next;
+			head = head.next;
 		}
 
-		return Fakehead.next;
+		if(shorter.next != null && longer.next != null){
+
+			shorted.next = longer.next;
+			return shorter;
+		}else if(shorted.next == null){
+			return longer.next;
+		}else{
+			return shorter.next;
+		}
+
 	}
 
 	

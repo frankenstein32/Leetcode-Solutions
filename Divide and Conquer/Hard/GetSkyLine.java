@@ -114,12 +114,14 @@ public class GetSkyLine{
             while(i < mergedSkyLine.size() && dupefound){
 
                 if(mergedSkyLine.get(current)[1] == mergedSkyLine.get(i)[1]){
-                    mergedSkyLine.remove(i);
+                    mergedSkyLine.remove(i);                    
                     dupefound = true;
                 }else{
                     dupefound = false;
                 }
             }   
+
+            current++;
         }
     }
 

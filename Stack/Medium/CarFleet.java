@@ -10,33 +10,26 @@ public class CarFleet{
 
 	}
 
-	public static int[] calculate(int[] temp){
+	public static int[] calculate(int target, int[] position, int[] speed){
 
-		int[] res = new int[temp.length];
+		TreeMap<Integer, Double> map = new TreeMap<>();
 
-		Stack<Integer> stack = new Stack<>();
+		for(int i = 0;i < position.length;i++){
 
-		for(int i = 0;i < nums.length;i++){
+			map.put(position[i], (double)(target - position[i]) / speed[i]);
+		}	
 
-			while(!stack.isEmpty() && nums[i] > nums[stack.peek()]){
+		int curr = 0;
+		int ans = 0;
+		for(int time : map.values){
 
-				int prevDay = stack.pop();
-				int currDay = nums[i];
-
-				res[prevDay] = currDay - prevDay - 1;
+			if(time > curr){
+				curr = time;
+				ans++;
 			}
-
-			stack.push(i);
 		}
 
-
-		while(!stack.isEmpty()){
-
-			res[stack.pop()] = 0;
-		}
-
-
-
-		return res;
+		return ans;
+		
 	}
 }

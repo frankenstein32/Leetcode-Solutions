@@ -15,18 +15,27 @@ public class RemoveNthFromLast{
 		public ListNode(int x){ this.val = x; }
 	}
 
-	public static ListNode getInter(ListNode A, ListNode B, int m, int n){
+	public static ListNode Find(ListNode head, int n){
 
-		ListNode a = A;
-		ListNode b = B;
 
-		while(a != b){
+		ListNode slow = head;
+		ListNode fast = head;
 
-			a = (a == null ? B : a.next);
-			b = (b == null ? A : b.next);
-		}
+	for(int i = 0;i < n - 1 && fast != null;i++){
 
-		return a;
+		fast = fast.next;
+	}
+
+	while(fast != null){
+
+		fast = fast.next;
+		slow = slow.next;
+
+	}
+
+	slow.next = slow.next;
+
+	return head;
 
 	}
 	
