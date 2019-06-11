@@ -17,12 +17,21 @@ public class HasPath{
 			return false;
 		}
 
-		if(sum == 0){
+		if(sum == root.val){
 			return true;
 		}
 
+		if(root.left != null)
+			boolean left = Find(root.left, sum - root.left.val);
 
-		return Find(root.left, sum - root.val) || Find(root.right, sum - root.val);
+		if(left)
+			return true;
+
+		if(root.right != null){
+			boolean right = Find(root.right, sum - root.right.val);
+		}
+
+		return right;
 	}
 
 

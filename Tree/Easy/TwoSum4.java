@@ -11,27 +11,85 @@ public class TwoSum4{
 		public TreeNode(int x){ val = x; }
 	}
 		
-	public List<Double> average(TreeNode root){
+	public boolean findTarget(TreeNode root, int target){
 
-	  List < Double > res = new ArrayList < > ();
-        Queue < TreeNode > queue = new LinkedList < > ();
-        queue.add(root);
-        while (!queue.isEmpty()) {
-            long sum = 0, count = 0;
-            Queue < TreeNode > temp = new LinkedList < > ();
-            while (!queue.isEmpty()) {
-                TreeNode n = queue.remove();
-                sum += n.val;
-                count++;
-                if (n.left != null)
-                    temp.add(n.left);
-                if (n.right != null)
-                    temp.add(n.right);
-            }
-            queue = temp;
-            res.add(sum * 1.0 / count);
+        return find(root, target, new HashSet<>());
+
+    }
+
+    public boolean find(TreeNode root, int target, Set<Integer> processed){
+
+        if(root == null){
+            return false;
         }
-        return res;
-	}
+
+        if(processed.contains(target - root.val)){
+            return true;
+        }
+
+        processed.add(root.val);
+
+        return find(root.left, target, processed) || find(root.right, target, processed);
+    }
+
+    public boolean findBFS(TreeNode root, int target){
+
+        Set<Integer> processed = new HashSet<>();
+        Queue<TreeNode> q = new LinkedList<>();
+
+        q.add(root);
+
+        while(!q.isEmpty()){
+
+            TreeNode rp = q.poll();
+
+            if(q.contains(target - rp.val)){
+                return true;
+            }
+
+            q.add(rp.val);
+
+            if(rp.left != null)
+                q.add(rp.left);
+            if(rp.right != null)
+                a.add(rp.right);
+        }
+
+        return false;
+    }
+
+    public boolean findTargetBST(TreeNode root, int target){
+
+        List<Integer> ans = new ArrayList<>();
+        Inorder(root, ans);
+
+        int i = 0, j = ans.size() - 1;
+
+        while(i <= j){
+
+            int sum = ans.get(i) + ans.get(j);
+
+            if(target == sum){
+                return true;
+            }else if(target > sum){
+                i++;
+            }else{
+                j--;
+            }
+        }
+
+        return false;
+    }
+
+    public void Inorder(TreeNode root, List<Integer> ans){
+
+        if(root == null)
+            return;
+
+        Inorder(root.left, ans);
+        ans.add(root.val);
+        Inorder(root.right, ans);
+
+    }
 	
 }

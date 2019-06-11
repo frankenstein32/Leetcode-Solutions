@@ -10,35 +10,27 @@ public class isSubTree{
 
 		public TreeNode(int x){ val = x; }
 	}
+	public boolean isSubtree(TreeNode s, TreeNode t, boolean found){
 
-	class HeapMover{
-		int sum = 0;
-		int tilt = 0;
+		if(s == null) return false;
+		if(isSame(s, t)) return true;
+
+		return isSubtree(s.left, t) || isSubtree(s.right, t);
 	}
 
-	public int findTilt(TreeNode root){
+	public boolean isSame(TreeNode s, TreeNode t){
 
-		HeapMover hm = new HeapMover();
-
-		return findTilt(root, hm).tilt;
-	}
-
-	public HeapMover findTilt(TreeNode root, HeapMover mover){
-
-
-		if(root == null){
-			return new HeapMover();
+		if(s == null && t == null){
+			return true;
 		}
 
-		HeapMover lp = findTilt(root.left, mover);
-		HeapMover rp = findTilt(root.right, mover);
+		if(s == null || t == null){
+			return false;
+		}
 
-		HeapMover sp = new HeapMover();
-		sp.sum = lp.sum + rp.sum + root.val;
-		sp.tilt = Math.abs(lp.sum - rp.sum) + lp.tilt + rp.tilt;
+		if(s.val != t.val) return false;
 
-		return sp;
+		return isSame(s.left, t.left) && isSame(s.right, t.right);
 	}
-
 	
 }

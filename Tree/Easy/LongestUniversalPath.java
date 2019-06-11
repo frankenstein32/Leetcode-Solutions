@@ -10,35 +10,33 @@ public class LongestUniversalPath{
 
 		public TreeNode(int x){ val = x; }
 	}
+
+    int ans = 0;
 		
-	public int secondMin(TreeNode root){
+	public int longestPath(TreeNode root){
 
         if(root == null){
-            return -1;
+            return 0;
         }
 
-        if(root.left == null && root.right == null){
-            return -1;
+        int lmax = longestPath(root.left);
+        int rmax = longestPath(root.right);
+
+        int tempLeft = 0;
+        int tempRight = 0;
+        if(root.left != null && root.left.val == root.val){
+
+            tempLeft += lmax + 1;
         }
 
-        int left = root.left.val;
-        int right = root.right.val;
+        if(root.right != null && root.right.val == root.val){
 
-        if(root.val == root.left.val){
-            left = secondMin(root.left);
+            tempRight += rmax + 1;
         }
 
-        if(root.val == root.right.val){
-            right = secondMin(root.right);
-        }
+        ans = Math.max(ans, tempRight + tempLeft);
 
-        if(left != -1 && right != -1){
-            return Math.min(left, right);
-        }else if(left != -1){
-            return left;
-        }else{
-            return right;
-        }
+        return Math.max(lmax, rmax);
     }
 	
 }

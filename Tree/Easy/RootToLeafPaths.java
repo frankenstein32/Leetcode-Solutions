@@ -15,31 +15,19 @@ public class RootToLeafPaths{
 
 		List<String> res = new ArrayList<>();
 
-		helper(root,res, new StringBuilder());
+		if(root != null)
+		helper(root,res, "");
 		return res;
 	}
 
-	public void helper(TreeNode root, List<String> res, StringBuilder sb){
+	public void helper(TreeNode root, List<String> res, String sb){
 
-		if(root.left == null && root.right == null){	
+		if(root.left == null && root.right == null) res.add(sb + root.val);
 
-			res.add(sb.toString());
-			return;
-		}
-
+		if(root.left != null) helper(root.left, res, sb + root.val + "->");
+		if(root.right != null) helper(root.right, res, sb + root.val + "->");
 
 
-		sb.append(root.val);
-		sb.append("->");
-
-		if(root.right != null)
-			helper(root.left, res,sb);
-
-		if(root.left != null)
-		helper(root.right, res, sb);
-
-		sb.deleteCharAt(sb.length() - 1);
-		sb.deleteCharAt(sb.length() - 1);
 	}
 
 

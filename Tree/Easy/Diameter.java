@@ -13,32 +13,57 @@ public class Diameter{
 
 	class HeapMover{
 
-		int sum = 0;
+		int ht = -1;
+		int dia = 0;
 	}
 
-	public TreeNode convertBST(TreeNode root){
-
-		HeapMover mover = new HeapMover();
-		convert(root,mover);
-		return root;
-	}
 	
-	public void convert(TreeNode root, HeapMover mover){
+
+	public int diameter(TreeNode root){
+
+		if(root == null){
+			return 0;
+		}
+
+		int ld = diameter(root.left);
+		int rd = diameter(root.right);
+
+		int sd = ht(root.left) + ht(root.right) + 2;
+
+		return Math.max(sp, Math.max(ld, rd));
+	}
+
+	public int ht(TreeNode root){
+
+		if(root == null){
+			return -1;
+		}
+
+		return Math.max(ht(root.left), ht(root.right)) + 1;
+	}
+
+	public HeapMover diameterOfBinaryTree(TreeNode root){
 
 
 		if(root == null){
-			return;
+			return new HeapMover();
 		}
 
-		convert(root.right, mover);
 
-		int temp = root.val;
-		mover.sum += temp;
-		root.val = mover.mosum;
+		HeapMover ldp = diameterOfBinaryTree(root.left);
+		HeapMover rdp = diameterOfBinaryTree(root.right);
 
-		convert(root.left, mover);
+		HeapMover sdp = new HeapMover();
+		int sh = Math.max(ldp.ht, rdp.ht) + 1;
+
+		int sp = ldp.ht + rdp.ht + 2;
+		sdp.ht = sh;
+		sdp.dia = Math.max(sp, Math.max(ldp.dia, rdp.dia));
+
+		return sdp;
 
 
 	}
 
+	
 }

@@ -17,7 +17,16 @@ public class MinDepth{
 			return Integer.MAX_VALUE;
 		}
 
-		return Math.min(height(root.left), height(root.right)) + 1;
+		int lh = height(root.left);
+		int rh = height(root.right);
+
+		if(lh == Integer.MAX_VALUE && rh == Integer.MAX_VALUE){
+
+			return 1;
+		}else {
+
+			return Math.min(lh, rh) + 1;
+		}
 	}
 
 

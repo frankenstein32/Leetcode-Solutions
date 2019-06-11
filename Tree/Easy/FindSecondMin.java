@@ -11,85 +11,34 @@ public class FindSecondMin{
 		public TreeNode(int x){ val = x; }
 	}
 		
-	public boolean findTarget(TreeNode root, int target){
-
-        return find(root, target, new HashSet<>());
-
-    }
-
-    public boolean find(TreeNode root, int target, Set<Integer> processed){
+	public int secondMin(TreeNode root){
 
         if(root == null){
-            return false;
+            return -1;
         }
 
-        if(processed.contains(target - root.val)){
-            return true;
+        if(root.left == null && root.right == null){
+            return -1;
         }
 
-        processed.add(root.val);
+        int left = root.left.val;
+        int right = root.right.val;
 
-        return find(root.left, target, processed) || find(root.right, target, processed);
-    }
-
-    public boolean findBFS(TreeNode root, int target){
-
-        Set<Integer> processed = new HashSet<>();
-        Queue<TreeNode> q = new LinkedList<>();
-
-        q.add(root);
-
-        while(!q.isEmpty()){
-
-            TreeNode rp = q.poll();
-
-            if(q.contains(target - rp.val)){
-                return true;
-            }
-
-            q.add(rp.val);
-
-            if(rp.left != null)
-                q.add(rp.left);
-            if(rp.right != null)
-                a.add(rp.right);
+        if(root.val == root.left.val){
+            left = secondMin(root.left);
         }
 
-        return false;
-    }
-
-    public boolean findTargetBST(TreeNode root, int target){
-
-        List<Integer> ans = new ArrayList<>();
-        Inorder(root, ans);
-
-        int i = 0, j = ans.size() - 1;
-
-        while(i <= j){
-
-            int sum = ans.get(i) + ans.get(j);
-
-            if(target == sum){
-                return true;
-            }else if(target > sum){
-                i++;
-            }else{
-                j--;
-            }
+        if(root.val == root.right.val){
+            right = secondMin(root.right);
         }
 
-        return false;
-    }
-
-    public void Inorder(TreeNode root, List<Integer> ans){
-
-        if(root == null)
-            return;
-
-        Inorder(root.left, ans);
-        ans.add(root.val);
-        Inorder(root.right, ans);
-
+        if(left != -1 && right != -1){
+            return Math.min(left, right);
+        }else if(left != -1){
+            return left;
+        }else{
+            return right;
+        }
     }
 	
 }

@@ -11,22 +11,27 @@ public class AverageLevels{
 		public TreeNode(int x){ val = x; }
 	}
 		
-	public String tree2str(TreeNode t){
+	public List<Double> average(TreeNode root){
 
-		if(t == null)
-			return "";
-		
-		if(t.left == null && t.right == null){
-
-			return t.val + "";
-		}
-
-		if(t.right == null){
-			return "("+tree2str(t.left)+")";
-		}
-
-		return "("+tree2str(t.left)+")"+"("+tree2str(t.right)+")";
-		
+	  List < Double > res = new ArrayList < > ();
+        Queue < TreeNode > queue = new LinkedList < > ();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            long sum = 0, count = 0;
+            Queue < TreeNode > temp = new LinkedList < > ();
+            while (!queue.isEmpty()) {
+                TreeNode n = queue.remove();
+                sum += n.val;
+                count++;
+                if (n.left != null)
+                    temp.add(n.left);
+                if (n.right != null)
+                    temp.add(n.right);
+            }
+            queue = temp;
+            res.add(sum * 1.0 / count);
+        }
+        return res;
 	}
 	
 }

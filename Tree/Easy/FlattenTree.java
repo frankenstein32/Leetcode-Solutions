@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class isBalanced{
+public class FlattenTree{
 		
 	class TreeNode{
 

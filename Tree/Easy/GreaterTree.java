@@ -27,14 +27,14 @@ public class GreaterTree{
 
 
 		if(root == null){
-			return root;
+			return;
 		}
 
 		convert(root.right, mover);
 
 		int temp = root.val;
-		sum += temp;
-		root.val = sum;
+		mover.sum += temp;
+		root.val = mover.mosum;
 
 		convert(root.left, mover);
 

@@ -11,23 +11,45 @@ public class InvertTree{
 		public TreeNode(int x){ val = x; }
 	}
 	
-	public int height(TreeNode root){
+	public TreeNode mirror(TreeNode root){
 
+			
 		if(root == null){
-			return Integer.MAX_VALUE;
+			return null;
 		}
 
-		int lh = height(root.left);
-		int rh = height(root.right);
+		TreeNode left = mirror(root.left);
+		TreeNode right = mirror(root.right);
 
-		if(lh == Integer.MAX_VALUE && rh == Integer.MAX_VALUE){
+		node.left = right;
+		node.right = left;
 
-			return 1;
-		}else {
-
-			return Math.min(lh, rh) + 1;
-		}
+		return node;
 	}
 
+	public TreeNode mirrotItr(TreeNode root){
+
+		Queue<TreeNode> q = new LinkedList<>();
+		q.add(root);
+
+		while(!q.isEmpty()){
+
+			TreeNode rp = q.poll();
+
+			TreeNode left = rp.left;
+			rp.left = rp.right;
+			rp.right = left;
+
+			if(rp.left != null){
+				q.add(rp.left);
+			}
+
+			if(rp.right != null){
+				q.add(rp.right);
+			}
+		}
+
+		return root;
+	}
 
 }
