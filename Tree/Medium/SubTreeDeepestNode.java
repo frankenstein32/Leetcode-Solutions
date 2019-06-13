@@ -12,68 +12,38 @@ public class SubTreeDeepestNode{
 		public Node(int x){ val = x; }
 	}
 
-	List<Integer> ans;
-	int Target;
-	int K;
+	public TreeNode subtreeWithAllDeepest(TreeNode root){
 
-	public List<Integer> distanceK(TreeNode root, TreeNode target, int K){
 
-		this.ans = new ArrayList<>();
-		this.Target = target;
-		this.K = K;
-
-		dfs(root);
-		return ans;
+		return dfs(root).node;
 	}
 
+	class Result{
 
-	public int dfs(TreeNode root){
+		int dist;
+		TreeNode node;
 
-		if(root.val == null){
-
-			return -1;
-		}
-
-		if(root.val == Target){
-			subTree(root, 0);
-			return;
-		}
-
-		int L = dfs(root.left);
-		int R = dfs(root.right);
-
-		if(L != -1){
-
-			if(L == K) ans.add(root.val);
-			
-			subTree(root.right, L + 1);
-			return L + 1;
-
-
-		}else if(R != -1){
-
-			if(R == K) ans.add(root.val);
-			subTree(root.left, R + 1);
-			return R + 1;
-		}else{
-			return -1;
-		}
+		public Result(TreeNode n, int d){ this.dist = d; this.node = n; }
 	}
 
-	public void subTree(TreeNode root, int depth){
+	public Resut dfs(TreeNode root){
 
 		if(root == null){
-			return;
+			return new Result(null, 0);
 		}
 
-		if(depth == K){
-			ans.add(root.val);
-			return;
+		Result L = dfs(node.left);
+		Result R = dfs(node.right);
+
+		if(L.dist > R.dist){
+			return new Result(root.left, L.dist + 1);
 		}
 
-		subTree(root.left, depth + 1);
-		subTree(root.right, depth + 1);
+		if(L.dist < R.dist){
+			return new Result(root.right, R.dist + 1);
+		}
 
+		return new Result(root, L.dist + 1);
 	}
 	
 }

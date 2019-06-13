@@ -12,25 +12,13 @@ public class CountNodes{
 		public Node(int x){ val = x; }
 	}
 
-	TreeNode ans = null;
-
-	public boolean lcaH(TreeNode root, TreeNode A, TreeNode B){
+	public int count(Treenode root){
 
 		if(root == null){
-			return root;
+			return 0;
 		}
 
-		int left = (lcaH(root.left, A, B) ? 1 : 0);
-		int right = (lcaH(root.right, A, B) ? 1 : 0);
-		int self = (A.val == root.val || B.val == root.val) ? 1 : 0;
-
-		if(left + self + right >= 2){
-			ans = root;
-		}
-
-		return (left + self + right) > 0;
-
-
+		return count(root.left) + count(root.right) + 1;
 	}
 
 }

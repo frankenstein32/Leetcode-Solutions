@@ -60,7 +60,20 @@ public class NodesAtDistanceK{
 		}
 	}
 
+	public void subTree(TreeNode root, int depth){
 
+		if(root == null){
+			return;
+		}
 
+		if(depth == K){
+			ans.add(root.val);
+			return;
+		}
+
+		subTree(root.left, depth + 1);
+		subTree(root.right, depth + 1);
+
+	}
 	
 }
