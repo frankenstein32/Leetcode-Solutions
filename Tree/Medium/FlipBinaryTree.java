@@ -12,16 +12,26 @@ public class FlipBinaryTree{
 		public Node(int x){ val = x; }
 	}
 
-	public TreeNode insertIntoMax(TreeNode root, int val){
+	int i = 0;
+	List<Integer> ans = new ArrayList<>();	
 
-		if(root != null && root.val > val){
+	public List<Integer> flipMatchVoyage(TreeNode root, int[] voyage){
 
-			root.right = insertIntoMax(root.right, val);
-			return root.right;
+		return (dfs(root,voyage) ? ans : Arrays.asList(-1));
+	}
+
+	public boolean dfs(TreeNode root, int[] voyage){
+
+		if(root == null) return true; 
+		if( root.val != voyage[i]) return false;
+
+		if(root.left != null && root.left != root.val){
+
+			ans.add(root.left.val);
+
+			return dfs(root.right, voyage) && dfs(root.left, voyage);
 		}
 
-		TreeNode nn = new TreeNode(val);
-		nn.left = root;
-		return nn;
+		return dfs(root.left, voyage) && dfs(root.right, voyage);
 	}
 }

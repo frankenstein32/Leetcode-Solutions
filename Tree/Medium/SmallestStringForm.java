@@ -37,10 +37,6 @@ public class SmallestStringForm{
 		dfs(root.left, sb);
 		dfs(root.right, sb);
 		sb.deleteCharAt(sb.length() - 1);
-
-
-
-		return Math.min(Left_sum, Right_sum) + root.val;    
 	}
 	
 }

@@ -11,49 +11,41 @@ public class FlattenTree{
 		public TreeNode(int x){ val = x; }
 	}
 
-	public int height(TreeNode root){
+	public void flatten(TreeNode root){
 
-		if(root == null){
-			return -1;
+		Stack<TreeNode> stack = new Stack<>();
+
+		stack.push(root);
+
+		while(!stack.isEmpty()){
+
+			TreeNode curr = stack.pop();
+
+			if(curr.right != null)
+				stack.push(curr.right);
+
+			if(curr.left != null)
+				stack.push(curr.left);
+
+			if(!stack.isEmpty())
+				curr.right =  stack.peek();
+			curr.left = null;
 		}
 
-		return Math.max(height(root.left), height(root.right)) + 1;
+		TreeNode prev = null;
+
+		public void flattenRecur(TreeNode root){
+
+			if(root == null)
+				return;
+
+			flattenRecur(root.left);
+			flattenRecur(root.right);
+
+			root.right = prev;
+			root.left = null;
+			prev = root;
+		}
 	}
-	
-	public boolean isBalanced(TreeNode root){
-
-		heapmover mover = new heapmover();
-		return helper(root).balanced;
-	}
-
-		class heapmover{
-
-			int height = -1;
-			boolean balanced = true;
-		}
-
-	public heapmover helper( TreeNode root){
-
-		if(root == null){
-			return new heapmover();
-		}
-
-
-		heapmover moverL = helper(root.left);
-		heapmover moverR = helper(root.right);
-
-		heapmover self = new heapmover();
-		int lh = moverL.height;
-		int rh = moverR.height;
-
-		self.height = Math.max(lh.height,rh.height) + 1;
-
-		if(Math.abs(lh - rh) > 1){
-			self.balanced =  false;
-		}
-
-		return self;
-	} 
-
 
 }

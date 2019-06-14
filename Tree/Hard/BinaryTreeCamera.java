@@ -24,6 +24,10 @@ public class BinaryTreeCamera{
 			return 0;
 		}
 
+		if(root.left == null && root.right == null){
+			return 1;
+		}
+
 		int inc = 1;
 
 		if(root.left != null){

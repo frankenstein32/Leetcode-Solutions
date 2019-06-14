@@ -12,63 +12,20 @@ public class MaxDiffBetweenNodes{
 		public Node(int x){ val = x; }
 	}
 
-	private class VOpair implements Comparable<VOpair>{
+	public int maxAncestor(TreeNode node){
 
-		int data;
-		int hl;
-
-		@Override 
-		public String toString(){
-			return this.data + "";
-		}
-
-		@Override
-		public int compareTo(VOpair o){
-			return this.hl - o.hl;
-		}
+		return dfs(root, 0, 0);
 	}
 
-	public List<List<Integer>> verticalTraversal(TreeNode root){
-
-		List<List<Integer>> ans = new ArrayList<>();
-		HashMap<Integer, ArrayList<VOpair>> map = new HashMap<>();
-
-		ArrayList<Integer> vlevels = map.keySet();
-		Collections.sort(vlevels);
-
-		for(int level : vlevels){
-
-			ArrayList<VOpair> row = map.get(level);
-			Collections.sort(row);
-
-			ArrayList<Integer> temp = new ArrayList<>();
-			for(VOpair vp : row){
-				temp.add(vp.data);
-			}
-
-			ans.addd(temp);
-		}
-
-		return ans;
-	}
-
-	public void VO(TreeNode root, HashMap<Integer, ArrayList<VOpair>> map, int vl, int hl){
+	public int dfs(TreeNode node, int max, int min){
 
 		if(root == null){
-			return ;
+			return max - min;
 		}
 
-		if(!map.containsKey(vl)){
-			map.put(vl, new ArrayList<>());
-		}
+		max = Math.max(node.val, max);
+		min = Math.min(node.val, min);
 
-		VOpair vp = new VOpair();
-		vp.data = root.val;
-		vp.hl = hl;
-
-		map.get(vl).add(vp);
-
-		VO(root.left, map, vl - 1, hl + 1);
-		VO(root.right, map, vl + 1, hl + 1);
+		return Math.max(dfs(node.left, max, min), dfs(node.right, max, min));
 	}
 }

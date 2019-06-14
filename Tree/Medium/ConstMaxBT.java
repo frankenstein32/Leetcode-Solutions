@@ -12,20 +12,32 @@ public class ConstMaxBT{
 		public Node(int x){ val = x; }
 	}
 
-	public int maxAncestor(TreeNode node){
+	public TreeNode constructMaximumBinaryTree(int[] nums){
 
-		return dfs(root, 0, 0);
+		return construct(nums, 0, nums.length - 1);
 	}
 
-	public int dfs(TreeNode node, int max, int min){
+	public TreeNode construct(int[] nums, int nlo, int nhi){
 
-		if(root == null){
-			return max - min;
+		if(nlo > nhi){
+			return null;
 		}
 
-		max = Math.max(node.val, max);
-		min = Math.min(node.val, min);
+		int idx = -1;
+		int max = Integer.MIN_VALUE;
+		for(int i = nlo;i <= nhi;i++){
 
-		return Math.max(dfs(node.left, max, min), dfs(node.right, max, min));
+			if(nums[i] > max){
+				max = nums[i];
+				idx = i;
+			}
+		}
+
+		TreeNode nn = new TreeNode(nums[idx]);
+
+		nn.left = construct(nums, nlo, idx - 1);
+		nn.right = construct(nums, idx + 1, nhi);
+
+		return nn;
 	}
 }

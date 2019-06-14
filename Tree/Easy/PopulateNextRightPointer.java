@@ -2,50 +2,50 @@ import java.util.*;
 
 public class PopulateNextRightPointer{
 		
-	class TreeNode{
+	class Node{
 
 		int val;
-		TreeNode right;
-		TreeNode left;
+		Node right;
+		Node left;
+		Node next;
 
-		public TreeNode(int x){ val = x; }
+		public Node(int x){ val = x; }
 	}
 
-	public void flatten(TreeNode root){
+	public Node connect(Node root){
 
-		Stack<TreeNode> stack = new Stack<>();
+		if(root == null)
+			return root;
 
-		stack.push(root);
+		Queue<Node> q = new LinkedList<>();
+		Queue<Node> helper = new LinkedList<>();
+		Node save = null;
+		q.add(root);
 
-		while(!stack.isEmpty()){
+		while(!q.isEmpty()){
 
-			TreeNode curr = stack.pop();
+			Node rp = q.poll();
+			save = rp;
+			if(q.isEmpty()){
+				rp.next = null;
+			}else{
+				rp.next = q.peek();
+			}
 
-			if(curr.right != null)
-				stack.push(curr.right);
+			if(rp.left != null)
+				helper.add(rp.left);
+			if(rp.right != null)
+				helper.add(rp.right);
 
-			if(curr.left != null)
-				stack.push(curr.left);
-
-			if(!stack.isEmpty())
-				curr.right =  stack.peek();
-			curr.left = null;
+			if(q.isEmpty()){
+				System.out.println(save.val);
+				q = helper;
+				helper = new LinkedList<>();
+			}
 		}
 
-		TreeNode prev = null;
 
-		public void flattenRecur(TreeNode root){
-
-			if(root == null)
-				return;
-
-			flattenRecur(root.left);
-			flattenRecur(root.right);
-
-			root.right = prev;
-			root.left = null;
-			prev = root;
-		}
-	}
+		return root;
+	}					
 
 }

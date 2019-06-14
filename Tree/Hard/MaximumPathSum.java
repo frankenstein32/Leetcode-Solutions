@@ -26,8 +26,8 @@ public class MaximumPathSum{
 			return 0;
 		}
 
-		int LSum = helper(root.left);
-		int RSum = helper(root.right);
+		int LSum = Math.max(0, helper(root.left));
+		int RSum = Math.max(0, helper(root.right));
 		int selfSum = LSum + RSum + root.val;
 
 		max = Math.max(selfSum, max);

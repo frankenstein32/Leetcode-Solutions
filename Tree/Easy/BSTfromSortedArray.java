@@ -23,6 +23,7 @@ public class BSTfromSortedArray{
 		}
 
 		int mid = (i + j) / 2;
+		
 		TreeNode nn = new TreeNode(nums[mid]);
 
 		nn.left =  helper(nums, i, mid - 1);

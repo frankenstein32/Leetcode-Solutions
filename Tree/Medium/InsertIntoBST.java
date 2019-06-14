@@ -12,38 +12,27 @@ public class InsertIntoBST{
 		public Node(int x){ val = x; }
 	}
 
-	public TreeNode addOneRow(TreeNode root, int v, int d){
-
-		if(d == 1){
-
-			TreeNode head = new TreeNode(v);
-			head.left = root;
-			return head;
-		}
-
-		dfs(root, v, 1, d);
-
-	}
-
-	public void dfs(TreeNode root, int v, int d, int n){
+	public TreeNode insertInto(TreeNode Parent, TreeNode root,int val){
 
 		if(root == null){
-			return;
+
+			TreeNode nn = new TreeNode(val);
+			if(parent.val < val){
+				parent.right = nn;
+			}else{
+				parent.left = nn;
+			}
+			return nn;
 		}
 
-		if(d + 1 == n){
-			TreeNode t = root.left;
-			root.left = new TreeNode(v);
-			root.left.left = t;
-			t = root.right;
-			root.right = new TreeNode(v);
-			root.right.right = t;
+		if(root.val > val){
 
-			return;
+			root.left = insertInto(root, root.left, val);
+		}else if(root.val < val){
+			root.right = insertInto(root, root.right, val);
 		}
 
-		dfs(root.left, v, d + 1, n);
-		dfs(root.right, v, d + 1, n);
+		return root;
 	}
 	
 }
