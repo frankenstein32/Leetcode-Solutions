@@ -4,32 +4,29 @@ public class KpairsWithSmallestSum{
 
 
       
-   public List<Integer> topKFrequent(int[] nums, int k){
+   public List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k){
 
-    HashMap<Integer, Integer> count = new HashMap<>();
 
-    for(int num : nums){
-      count.put(count.getOrDefault(num, 0) + 1);
-    }
+      PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> a[0] + a[1] - b[0] - b[1]);
+      List<int[]> ans = new ArraList<>();
 
-    PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> count.get(b) - count.get(a));
+      if(nums1.length == 0 || nums2.length == 0 || k == 0) return ans;
 
-    for(int key : count.keySet()){
+      for(int i = 0;i < nums.length && i < k;i++) pq.offer(new int[]{nums1[i], nums2[0], 0});
 
-      pq.offer(key);
+      while(k -- > 0 && !pq.isEmpty()){
 
-      if(pq.size() > k){
-        pq.poll();
+        int[] cur = pq.poll();
+        ans.add(new int[]{cur[0], cur[1]});
+
+        if(curr[2] == nums.length - 1){
+          continue;
+        }
+
+        pq.offer(new int[]{cur[0], nums2[cur[2] + 1], cur2[2] + 1});
+
       }
-    }
 
-    List<Integer> ans = new ArrayList<>();
-
-    while(!pq.isEmpty()){
-      ans.add(pq.poll());
-    }
-
-    return ans;
-
+      return ans;
    }
 }

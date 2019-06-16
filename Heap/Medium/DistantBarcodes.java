@@ -45,9 +45,11 @@ public class DistantBarcodes{
         if(b.cnt > 1){
             pq.offer(new Pair(b.val, b.cnt - 1));
         }
-
-
     }
+
+    if(!pq.isEmpty()) res[i] = pq.poll().val;
+
+    return res;
 
    }
 }

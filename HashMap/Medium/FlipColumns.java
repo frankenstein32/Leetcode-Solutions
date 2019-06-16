@@ -35,6 +35,7 @@ public class FlipColumns{
 	public int AnotherApproach(int[][] matrix){
 
 		Map<String, Integer> map = new HashMap<>();
+		int res = 0;
 
 		for(int[] row : matrix){
 
@@ -52,5 +53,11 @@ public class FlipColumns{
 			map.put(str1, map.getOrDefault(str1, 0) + 1);
 			map.put(str2, map.getOrDefault(str2, 0) + 1);
 		}
+
+		for(int val : map.values()){
+			res = Math.max(val);
+		}
+
+		return res;
 	}
 }

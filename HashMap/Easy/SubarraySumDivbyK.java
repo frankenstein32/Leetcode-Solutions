@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class OccurenceAfterBigram{
+public class SubarraySumDivbyK{
 	
 
 	public String[] findOccurences(String text, String first, String second){

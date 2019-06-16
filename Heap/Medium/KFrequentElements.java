@@ -4,36 +4,32 @@ public class KFrequentElements{
 
 
       
-    public String frequencySort(String S){
+   public List<Integer> topKFrequent(int[] nums, int k){
 
-      HashMap<Character, Integer> map = new HashMap<>();
+    HashMap<Integer, Integer> count = new HashMap<>();
 
-      for(char ch : S.toCharArray()){
-        map.put(ch, map.getOrDefault(ch, 0) + 1);
+    for(int num : nums){
+      count.put(count.getOrDefault(num, 0) + 1);
+    }
+
+    PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> count.get(b) - count.get(a));
+
+    for(int key : count.keySet()){
+
+      pq.offer(key);
+
+      if(pq.size() > k){
+        pq.poll();
       }
+    }
 
-      PriorityQueue<Character> pq = new PriorityQueue<>();
+    List<Integer> ans = new ArrayList<>();
 
-      StringBuilder sb = new StringBuilder();
+    while(!pq.isEmpty()){
+      ans.add(pq.poll());
+    }
 
-      for(char ch : map.keySet()){
+    return ans;
 
-        pq.offer(ch);
-      }
-
-      while(!pq.isEmpty()){
-
-          char ch = pq.poll();
-          int cnt = map.get(ch);
-           
-          while(cnt != 0){
-              sb.append(ch);
-              cnt--;
-          }
-
-      }
-
-      return sb.toString();
-
-    } 
+   }
 }

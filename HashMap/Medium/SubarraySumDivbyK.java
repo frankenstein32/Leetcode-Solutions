@@ -24,4 +24,25 @@ public class SubarraySumDivbyK{
 		return count;
 	}
 
+	public int subarrayDivbyK_EFF(int[] A, int k){
+
+		int[] map = new int[k];
+
+		map[0] = 1;
+		int sum = 0, count = 0;
+
+		for(int a : A){
+			sum = (sum + a) % k;
+
+			if(sum < 0){
+				sum += k;
+			}
+
+			count += map[sum];
+			map[sum]++;
+		}
+
+		return count;
+	}
+
 }

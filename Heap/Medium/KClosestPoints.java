@@ -2,54 +2,29 @@ import java.util.*;
 
 public class KClosestPoints{
 
-   class Pair{
+   
+   public int[][] kClosest(int[][] points, int K){
 
-    int val;
-    int cnt;
 
-    public Pair(int v, int c){ this.val = v; this.cnt = c;}
+    PriorityQueue<Integer> pq = new PriorityQueue<>((a,b) -> dist(a) - dist(b));
+
+    for(int[] arr : points){
+
+        pq.offer(arr);
+    }
+
+    int[][] ans = new int[K][2];
+
+    for(int i = 0;i <= K;i++){
+
+        ans[i] = pq.poll();
+    }
+
+    return ans;
    }
 
-   public int[] rearrangeBarCodes(int[] barcodes){
+   public int dist(int[] points){
 
-    HashMap<Integer, Integer> map = new HashMap<>();
-
-    for(int codes : barcodes){
-
-        map.put(codes, map.getOrDefault(codes, 0) + 1);
-    }
-
-    PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> b.cnt - a.cnt);
-
-    for(Map.Entry<Integer, Integer> entry : map){
-
-        pq.offer(entry.getKey(),entry.getValue());
-    }
-
-    int i = 0;
-    int[] res = new int[barcodes.length];
-
-    while(pq.size() >= 2){
-
-        Pair a = pq.poll();
-        Pair b = pq.poll();
-
-        res[i++] = a.val;
-
-        if(a.cnt > 1){
-            pq.offer(new Pair(a.val, a.cnt - 1));
-        }
-
-        res[i++] = b.val;
-
-        if(b.cnt > 1){
-            pq.offer(new Pair(b.val, b.cnt - 1));
-        }
-    }
-
-    if(!pq.isEmpty()) res[i] = pq.poll().val;
-
-    return res;
-
+    return points[0] * points[0] + points[1] * points[1];
    }
 }

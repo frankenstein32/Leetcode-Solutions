@@ -2,61 +2,45 @@ import java.util.*;
 
 public class TopKfrequentWords{
 
-   
-   public int networkDelayTime(int[][] times, int N, int K){
+  HashMap<String, Integer> count;
+   public List<String> topKFrequent(String[] words, int k){
 
-      HashMap<Integer, HashMap<Integer, Integer>>timing = new HashMap<>();
+        count = new HashMap<>();
 
-      for(int[] arr : times){
+        for(String word :words){
 
-        if(!timing.containsKey()){
-          timing.put(arr, new HashMap<>());
+          count.put(word, count.getOrDefault(word, 0) + 1);
         }
 
-        timing.get(arr[0]).put(arr[1], arr[2]);
-      }
+        PriorityQueue<String> pq = new PriorityQueue<>((a, b) -> count.get(a) - count.get(b));
 
-      PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+          for(String word : count.keySet()){
 
-      HashMap<Integer, Integer> map = new HashMap<>();
+            pq.offer(word);
 
-      pq.offer(new int[]{0, K});
+            if(pq.size() > k){
+              pq.poll();
+            }
+          }
 
-      while(!pq.isEmpty()){
+        List<String> ans = new ArrayList<>();
 
-        int[] top = pq.poll();
+        for(int i = 0;i < k;i++){
 
-        int time = top[0];
-        int val = top[1];
-
-        if(map.containsKey(val)){
-          continue;
+          ans.add(pq.poll());
         }
 
-        map.put(val, time);
-
-
-        HashMap<Integer, Integer> adj = timing.get(val);
-
-        for(int a : adj.keySet()){
-
-          queue.offer(new int[]{time + adj.get(a), a});
-        }
-      }
-
-      if(map.size() != times.length){
-        return -1;
-      }
-
-      int ans = 0;
-      for(int cand : map.values()){
-
-        ans = Math.max(ans, cand);
-
-      }
-
-      return ans;
-
-
+        return ans;
    }
+
+   class StringComparator implements Comparator<String>{
+
+
+      @Override
+      public int compare(String s1, String s2){
+
+        return (count.get(s1) > count.get(s2) : -1 : (s1.compareTo(s2)));
+      }
+   }
+
 }
