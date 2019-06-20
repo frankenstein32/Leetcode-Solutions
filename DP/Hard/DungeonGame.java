@@ -106,7 +106,7 @@ class DungeonGame{
 			}
 		}
 
-		return strg[0] ;
+		return strg[0];
 	}
 }
 

@@ -43,7 +43,25 @@ class SlidingWindowMax{
 	public int[] maxSlidingWindow(int[] nums){
 
 
-		
+		PriorityQueue<Integer> pq = new PriorityQueue<>(k);
+
+		for(int i = 0;i < k;i++){
+
+			pq.offer(nums[i]);
+		}
+		int[] ans = new int[nums.length - k + 1];
+
+		ans[0] = pq.peek();
+		for(int i = k;i < nums.length;i++){
+
+			pq.remove(nums[i - k]);
+			pq.add(nums[i]);
+			ans[i - k + 1] = pq.peek();
+
+		}
+
+		return ans;
+
 	}
 }
 
