@@ -2,50 +2,21 @@ import java.util.*;
 
 class SingleNumber {
 
-	HashMap<Integer, Integer> map;
-	int M;
-	Random r;
+	public int singleNumber(int[] nums){
 
-    public Solution(int N, int[] blacklist) {
-        
-    	map = new HashMap<>();
 
-        for(int b : blacklist){
-
-        	map.put(b, -1);
+        if(nums == null || nums.length <= 2){
+            return 0;
         }
 
-        M = N - map.size();
+        int val = nums[0];
 
-        for(int b : blacklist){
+        for(int i = 1;i < nums.length;i++){
 
-        	if(b < M){
-
-        		while(map.containsKey(N - 1)) N--;
-
-        		map.put(b, N - 1);
-        		N--;
-        	}
+            val = val ^ nums[i];
         }
 
-        r = new Random();
-    }
-    
-    public int pick() {
-        
-    	int p = r.nextInt(M);
-
-    	if(map.containsKey(p)){
-    		return map.get(p);
-    	}
-
-    	return p;
-
+        return val;
     }
 }
 
-/**
- * Your Solution object will be instantiated and called as such:
- * Solution obj = new Solution(N, blacklist);
- * int param_1 = obj.pick();
- */

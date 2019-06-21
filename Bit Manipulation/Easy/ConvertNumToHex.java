@@ -16,6 +16,8 @@ class ConvertNumToHex {
 			str += map[num & 15];
 			num = (num >>> 4);
 		}
+
+		return str;
 	}
 }
 

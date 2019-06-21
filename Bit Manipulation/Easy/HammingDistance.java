@@ -2,22 +2,19 @@ import java.util.*;
 
 class HammingDistance {
 
-	public String toHex(int num){
+	public int hammingDistance(int x, int y){
 
-		if(num == 0){
-			return "0";
+		int xor = x ^ y;
+
+		int count = 0;
+
+		while(xor != 0){
+
+			count += (xor & 1);
+			xor = xor >> 1;
 		}
 
-		char[] map = {'0','1','2','3','4','5','6','7','8','9','a','b','c','d','e','f'};
-		String str = "";
-
-		while(num != 0){
-
-			str += map[num & 15];
-			num = (num >>> 4);
-		}
-
-		return str;
+		return count;
 	}
 }
 
