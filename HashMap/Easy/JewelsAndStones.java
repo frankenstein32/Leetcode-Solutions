@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class LongestWordInDictionary{
+public class JewelsAndStones{
 
       public String longestWord(String[] words){
 
