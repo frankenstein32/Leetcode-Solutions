@@ -27,3 +27,4 @@ Containing Solution for LeetCode Questions TopicWise
 - Segment Trees
 - Topological Sort
 - Map
+- Binary Search
